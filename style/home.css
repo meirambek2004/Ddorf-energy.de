@@ -1,0 +1,491 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #e6f0fa, #f5f7fa);
+  font-family: Arial, sans-serif;
+  position: relative;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+.header {
+  width: 97%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e90ff;
+  margin-top: 20px;
+}
+.ddorf {
+  color: black;
+}
+.header .icon {
+  display: flex;
+  gap: 10px;
+}
+.widjet {
+  width: 387px;
+  height: 24px;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  border: 1px solid white;
+  border-radius: 20px;
+  background-color: #ffffff;
+  position: relative;
+  left: 130px;
+}
+.widjet-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.widjet-link a {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.device {
+  position: absolute;
+  text-align: center;
+}
+.device .power {
+  position: absolute;
+  top: 10px;
+  left: -38px;
+  width: 94px;
+  height: 52px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* margin-top: 10px; */
+  font-size: 14px;
+}
+.device .status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+.device .status .toggle {
+  width: 20px;
+  height: 20px;
+  background: #00cc00;
+  border-radius: 50%;
+}
+.device .status .percentage {
+  background: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+.device .status .percentage.low {
+  background: #ffcccb;
+}
+.device .status .percentage.high {
+  background: #ccffcc;
+}
+.house {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.grid {
+  top: 3%;
+  left: 25%;
+}
+.solar {
+  top: 4%;
+  right: 22%;
+}
+.ac {
+  bottom: 10%;
+  left: 22%;
+}
+.battery {
+  bottom: 10%;
+  right: 23%;
+}
+.ev {
+  bottom: 32%;
+  right: 5%;
+}
+.inverter {
+  bottom: 37%;
+  left: 5%;
+}
+.lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.lines svg {
+  width: 100%;
+  height: 100%;
+}
+.bottom-nav {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+.bottom-nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.bottom-nav a img {
+  width: 20px;
+}
+
+.first-vector {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+.second-vector {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+}
+.third-vector {
+  position: absolute;
+  top: 60%;
+  left: 30%;
+}
+.fourth-vector {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+}
+.fifth-vector {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+}
+.six-vector {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+}
+
+@media screen and (max-width: 1210px) {
+  body {
+    padding: 0 10px; /* Немного отступов от краёв */
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .nav a {
+    font-size: 14px;
+    gap: 4px;
+  }
+
+  .device img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .device .power {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+
+  .device .status .percentage {
+    font-size: 13px;
+  }
+
+  .bottom-nav a {
+    font-size: 14px;
+  }
+
+  .dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px; /* Дополнительное пространство сверху */
+  }
+
+  .device {
+    width: 180px; /* Немного увеличим ширину устройства для лучшей видимости */
+    text-align: center;
+  }
+
+  .device .status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .lines {
+    display: none;
+  }
+}
+.first-vector {
+  position: absolute;
+  top: 22%;
+  left: 40%;
+}
+.second-vector {
+  position: absolute;
+  top: 23%;
+  left: 52%;
+}
+.third-vector {
+  position: absolute;
+  top: 60%;
+  left: 38%;
+}
+.fourth-vector {
+  position: absolute;
+  top: 60%;
+  left: 49%;
+}
+.fifth-vector {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+}
+.six-vector {
+  position: absolute;
+  top: 40%;
+  left: 55%;
+}
+.battery-power {
+  position: absolute;
+  top: 10px;
+  left: -38px;
+  width: 94px;
+  height: 52px;
+  background: white;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.ac-power {
+  width: 87px;
+  height: 52px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+}
+.ev-power {
+  width: 94px;
+  height: 52px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50px;
+  left: -30px;
+}
+.ev-battery {
+  width: 106px;
+  height: 52px;
+  background-color: #daf8d3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00cc00;
+  gap: 10px;
+  position: absolute;
+  top: 100px;
+  right: 105px;
+}
+.inter-power {
+  width: 160px;
+  height: 72px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 45%;
+  left: 65%;
+  gap: 15px;
+}
+.on-of {
+  width: 62px;
+  height: 32px;
+  background-color: #eceef6;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.toogle {
+  width: 22px;
+  height: 22px;
+  background-color: #00cc00;
+  border-radius: 50%;
+}
+.grid-poweer {
+  width: 99px;
+  height: 52px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 64%;
+  left: 40%;
+}
+.solar-pow {
+  width: 94px;
+  height: 52px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 60%;
+}
+.home-pow {
+  width: 87px;
+  height: 52px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 1%;
+  left: 30%;
+}
+
+@media (max-width: 393px) {
+  body {
+    width: 100%;
+    display: flex;
+    background: #ffffff;
+  }
+  .header {
+    display: flex;
+    position: relative;
+    background-color: #eceef6;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .icon p {
+    display: none;
+  }
+  .widjet {
+    width: 300px;
+    position: absolute;
+    left: 40px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    background: none;
+    border: none;
+  }
+  .widjet-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .widjet-link a {
+    text-decoration: none;
+  }
+  .dashboard {
+    display: flex;
+    position: relative;
+    background: #eceef6;
+  }
+  .device {
+    max-width: 393px;
+  }
+  .device img {
+    width: 150px;
+    height: 150px;
+  }
+  .solar {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+  }
+  .grid {
+    position: absolute;
+    left: -5%;
+    top: 5%;
+  }
+  .house {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+  }
+  .inverter {
+    position: absolute;
+    left: -5%;
+  }
+  .ev {
+    position: absolute;
+    left: 50%;
+  }
+  .battery {
+    position: absolute;
+    left: -5%;
+    top: 70%;
+  }
+  .ac {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+  }
+  .solar-pow,
+  .grid-poweer {
+    width: 74px;
+    height: 32px;
+  }
+}

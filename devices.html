@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Devices Dashboard</title>
+    <link rel="stylesheet" href="/style/devices.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="logo">
+        <img src="/index-img/icon.svg" alt="Logo" />
+        <p><span class="blue">Ddorf-</span>energy.de</p>
+      </div>
+      <nav class="menu">
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/home.svg" alt="Home" />
+          <a href="#">Home</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/cast.svg" alt="Forecast" />
+          <a href="#">Forecast</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/history.svg" alt="History" />
+          <a href="#">History</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="content">
+      <section class="devices">
+        <h2>Devices</h2>
+        <div class="devices-grid">
+          <div class="device-card">
+            <div class="title-row">
+              <span>Smart meter</span>
+              <span class="status running">running</span>
+            </div>
+            <p>
+              Production:
+              <span class="status-row">
+                <span></span>
+                <strong>1604 W</strong>
+              </span>
+            </p>
+            <p>
+              Consumption:
+              <span class="status-row">
+                <span></span>
+                <strong>1604 W</strong>
+              </span>
+            </p>
+            <p>
+              Feed-in:
+              <span class="status-row">
+                <span></span>
+                <strong>2 W</strong>
+              </span>
+            </p>
+            <div class="status-row">
+              <button class="settings-btn">⚙ Settings</button>
+            </div>
+          </div>
+          <div class="device-card">
+            <div class="title-row">
+              <span>Battery, SMA</span>
+              <div>
+                <span class="battery-status">🔋 58%</span>
+                <span class="status running">running</span>
+              </div>
+            </div>
+            <p>Charging <span class="status-row">1604 W</span></p>
+            <div class="status-row">
+              <button class="settings-btn">⚙ Settings</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="other-devices">
+        <div class="section-header">
+          <h3>Other Devices</h3>
+          <div class="action-buttons">
+            <button class="priority">📊 Prioryty</button>
+            <button class="add">➕ Add Device</button>
+          </div>
+        </div>
+        <div class="other-grid">
+          <div class="device-card">
+            <p>Wallbox <span class="status-row">2000 W</span></p>
+
+            <div class="modes">
+              <button class="off">Off</button>
+              <button class="on">On</button>
+              <button class="surplus">Surplus</button>
+              <button class="smart">Smart</button>
+            </div>
+            <div class="status-row">
+              <button class="settings-btn">⚙ Settings</button>
+            </div>
+          </div>
+          <div class="device-card">
+            <p>Heat Pump <span class="status-row">300 W</span></p>
+
+            <div class="modes">
+              <button class="off">Off</button>
+              <button class="schedule">Schedule</button>
+              <button class="on">On</button>
+              <button class="smart">Smart</button>
+            </div>
+            <div class="status-row">
+              <button class="settings-btn">⚙ Settings</button>
+            </div>
+          </div>
+          <div class="device-card">
+            <p>Switch 1 <span class="status-row">200 W</span></p>
+
+            <div class="modes">
+              <button class="off">Off</button>
+              <button class="schedule">Schedule</button>
+              <button class="on">On</button>
+              <button class="smart">Smart</button>
+            </div>
+            <div class="status-row">
+              <button class="settings-btn">⚙ Settings</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="border-line"></div>
+
+    <footer class="bottom-nav">
+      <div class="bottom-bar">
+        <a href="#"><img src="/home-img/dashboard.svg" alt="" />Dashboard</a>
+        <a href="#"><img src="/home-img/devices.svg" alt="" />Devices</a>
+        <a href="#"><img src="/home-img/settings.svg" alt="" />Settings</a>
+      </div>
+    </footer>
+  </body>
+</html>

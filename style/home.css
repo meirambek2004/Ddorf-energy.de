@@ -157,6 +157,12 @@ body {
   align-items: center;
   gap: 5px;
 }
+.nav-dash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
 .bottom-nav a img {
   width: 20px;
 }
@@ -400,12 +406,18 @@ body {
   top: 1%;
   left: 30%;
 }
+.mobile-lines {
+  display: none;
+}
 
 @media (max-width: 393px) {
   body {
     width: 100%;
     display: flex;
     background: #ffffff;
+  }
+  .mobile-lines {
+    display: block;
   }
   .header {
     display: flex;
@@ -442,6 +454,7 @@ body {
     display: flex;
     position: relative;
     background: #eceef6;
+    border-radius: 10px;
   }
   .device {
     max-width: 393px;
@@ -452,13 +465,13 @@ body {
   }
   .solar {
     position: absolute;
-    top: 5%;
-    left: 50%;
+    top: 1%;
+    left: 54%;
   }
   .grid {
     position: absolute;
     left: -5%;
-    top: 5%;
+    top: 1%;
   }
   .house {
     position: absolute;
@@ -468,24 +481,113 @@ body {
   .inverter {
     position: absolute;
     left: -5%;
+    top: 50%;
   }
   .ev {
     position: absolute;
-    left: 50%;
-  }
-  .battery {
-    position: absolute;
-    left: -5%;
-    top: 70%;
-  }
-  .ac {
-    position: absolute;
-    left: 50%;
-    top: 70%;
+    left: 54%;
+    top: 50%;
   }
   .solar-pow,
   .grid-poweer {
     width: 74px;
     height: 32px;
+  }
+  .ac-power {
+    width: 67px;
+    height: 32px;
+  }
+  .battery-power {
+    position: absolute;
+    left: 0px;
+    width: 74px;
+    height: 32px;
+  }
+  .inter-power {
+    width: 140px;
+    height: 42px;
+    position: absolute;
+    top: -10px;
+    left: 20px;
+  }
+  .ev-battery img {
+    width: 24px;
+    height: 24px;
+  }
+  .ev-power {
+    position: absolute;
+    left: 50px;
+    top: -40px;
+    width: 74px;
+    height: 32px;
+  }
+  .ev-battery {
+    position: absolute;
+    left: 35px;
+    top: -10px;
+    width: 86px;
+    height: 34px;
+  }
+  .battery {
+    position: absolute;
+    left: 54%;
+    top: 78%;
+  }
+  .ac {
+    position: absolute;
+    left: -4%;
+    top: 78%;
+  }
+  .home-pow {
+    width: 67px;
+    height: 32px;
+  }
+  .mobile-lines {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .mobile-first {
+    position: relative;
+    top: -750%;
+    left: -10px;
+  }
+  .mobile-second {
+    position: relative;
+    top: -750%;
+    left: -10px;
+  }
+  .mobile-third {
+    position: absolute;
+    top: -550%;
+    left: -80%;
+  }
+  .mobile-fourth {
+    position: absolute;
+    top: -570%;
+  }
+  .mobile-five {
+    position: absolute;
+    top: -470%;
+    left: 10px;
+  }
+  .mobile-six {
+    position: absolute;
+    top: -470%;
+    left: 65px;
+  }
+  .bottom-nav {
+    width: 360px;
+    display: flex;
+    justify-content: center;
+    background-color: #eceef6;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .nav-dash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
   }
 }

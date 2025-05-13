@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/persInfo.css">
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="logo">
+        <img src="/index-img/icon.svg" alt="Logo" />
+        <p>
+          <span class="black">Ddorf-</span> <span class="blue">energy.de</span>
+        </p>
+      </div>
+      <nav class="menu">
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/home.svg" alt="Home" />
+          <a href="home.html">Home</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/cast.svg" alt="Forecast" />
+          <a href="/forecast.html">Forecast</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/history.svg" alt="History" />
+          <a href="/history.html">History</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="content">
+        <div class="head">
+          <img id="change-button" src="/newAcc-img/button.svg" alt="" />
+          <p>Edit personal information</p>
+        </div>
+        <div class="info">
+          <div class="name">
+            <p>First name</p>
+            <input type="text" name="" id="" />
+            <img
+              src="/newAcc-img/input.svg"
+              alt=""
+              width="16px"
+              class="doght"
+            />
+          </div>
+          <div class="name">
+            <p>Surname</p>
+            <input type="text" name="" id="" />
+            <img
+              src="/newAcc-img/input.svg"
+              alt=""
+              width="16px"
+              class="doght"
+            />
+          </div>
+          <div class="coun">
+            <div class="country">
+              <p>Country</p>
+              <select>
+                <option value=""></option>
+                <option value="de">Germany</option>
+                <option value="us">United States</option>
+                <option value="fr">France</option>
+                <option value="kz">Kazakhstan</option>
+              </select>
+            </div>
+            <div class="city">
+              <p>City</p>
+              <input type="text" />
+              <img
+                src="/newAcc-img/input.svg"
+                alt=""
+                width="16px"
+                class="county-doght"
+              />
+            </div>
+            <div class="zip">
+              <p>Zip code</p>
+              <input type="text" name="" id="" />
+              <img
+                src="/newAcc-img/input.svg"
+                alt=""
+                width="16px"
+                class="county-doght"
+              />
+            </div>
+          </div>
+          <div class="name">
+            <p>Street</p>
+            <input type="text" name="" id="" />
+            <img
+              src="/newAcc-img/input.svg"
+              alt=""
+              width="16px"
+              class="doght"
+            />
+          </div>
+          <div class="name">
+            <p>House nr</p>
+            <input type="text" name="" id="" />
+            <img
+              src="/newAcc-img/input.svg"
+              alt=""
+              width="16px"
+              class="doght"
+            />
+          </div>
+          <div class="upload">
+            <button>Update information</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bottom-nav">
+      <div class="bottom-bar">
+        <a href="#" data-page="dashboard"
+          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
+        >
+        <a href="devices.html" data-page="devices"
+          ><img src="/home-img/devices.svg" alt="" /><span>Devices</span></a
+        >
+        <a href="account.html" data-page="subsTrial"
+          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
+        >
+      </div>
+    </footer>
+  </body>
+  <script>
+    const pageFromPath = location.pathname;
+
+    document.querySelectorAll(".bottom-bar a").forEach((link) => {
+      const page = link.dataset.page;
+
+      if (
+        (page === "dashboard" && pageFromPath.includes("dashboard")) ||
+        (page === "devices" && pageFromPath.includes("devices")) ||
+        (page === "subsTrial" &&
+          (pageFromPath.includes("changPassw") ||
+            pageFromPath.includes("subsPremium") ||
+            pageFromPath.includes("/subsTrial.html") ||
+            pageFromPath.includes("persInfo")))
+      ) {
+        link.classList.add("active");
+      }
+    });
+    document
+      .getElementById("change-button")
+      .addEventListener("click", function () {
+        window.location.href = "account.html";
+      });
+  </script>
+</html>

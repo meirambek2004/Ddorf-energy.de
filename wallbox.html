@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallbox Settings</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/wallbox.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="logo">
+        <img src="/index-img/icon.svg" alt="Logo" />
+        <p>
+          <span class="black">Ddorf-</span> <span class="blue">energy.de</span>
+        </p>
+      </div>
+      <nav class="menu">
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/home.svg" alt="Home" />
+          <a href="home.html">Home</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/cast.svg" alt="Forecast" />
+          <a href="/forecast.html">Forecast</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/history.svg" alt="History" />
+          <a href="/history.html">History</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <h1 class="title">Wallbox settings</h1>
+      <div class="settings-container">
+        <div class="column left-column">
+          <div class="card">
+            <h2 class="card-title" id="charging">Charging Power Limit</h2>
+            <div class="input-group" id>
+              <input type="text" value="11 kW" id="chargin-input" />
+            </div>
+          </div>
+
+          <div class="card surplus-card">
+            <h2 class="card-title">Surplus</h2>
+            <div class="input-group">
+              <label>Surplus Threshold</label>
+              <input type="text" value="100 W" />
+            </div>
+            <div class="input-group">
+              <label>SoC Battery charge level</label>
+              <div class="toggle">
+                <span>off</span>
+                <div class="slider">
+                  <div class="thumb"></div>
+                </div>
+                <span>on</span>
+              </div>
+            </div>
+            <div class="range">
+              <span>0%</span>
+              <input type="range" min="0" max="100" value="50" />
+              <span>100%</span>
+              <span class="range-value">50-80%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="column right-column">
+          <div class="card">
+            <h2 class="card-title">Smart</h2>
+            <div class="input-group">
+              <label>Target charge time</label>
+              <input type="text" value="2025.09.01" readonly />
+            </div>
+            <div class="input-group">
+              <label>Current charge level of the car</label>
+              <input type="text" value="15%" readonly />
+            </div>
+            <div class="input-group">
+              <label>Target charge level</label>
+              <input type="text" value="80%" readonly />
+            </div>
+            <div class="input-group">
+              <label>EV's total battery</label>
+              <input type="text" value="60 kWh" readonly />
+            </div>
+            <div class="input-group">
+              <label>Calculated cost</label>
+              <span class="cost">54 cent</span>
+            </div>
+          </div>
+
+          <div class="card" id="card-advanced">
+            <h2 class="card-title">Advanced</h2>
+            <div class="input-group">
+              <label>Wallbox Minimum ON-Time</label>
+              <input type="text" value="15 s" readonly />
+            </div>
+            <div class="input-group">
+              <label>Wallbox Minimum OFF-Time</label>
+              <input type="text" value="30 s" readonly />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bottom-nav">
+      <div class="bottom-bar">
+        <a href="#" data-page="dashboard"
+          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
+        >
+        <a href="devices.html" data-page="devices"
+          ><img src="/home-img/decice-ico.svg" alt="" /><span>Devices</span></a
+        >
+        <a href="account.html" data-page="subsTrial"
+          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
+        >
+      </div>
+    </footer>
+  </body>
+  <script></script>
+</html>

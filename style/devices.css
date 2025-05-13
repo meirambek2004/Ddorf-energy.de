@@ -5,6 +5,11 @@ body {
   color: #222;
 }
 
+.bottom-bar a.active img {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%);
+}
+
 .top-bar {
   display: flex;
   justify-content: flex-start;
@@ -21,6 +26,10 @@ body {
 
 .logo .blue {
   color: #1e90ff;
+  font-weight: bold;
+}
+.logo .black {
+  color: black;
   font-weight: bold;
 }
 .menu {
@@ -157,8 +166,21 @@ p {
 }
 
 .on {
-  background: #d1f7d6;
-  color: green;
+  background: #daf8d3 !important;
+  color: black !important;
+}
+.off {
+  color: #808492;
+  background-color: #eceef6;
+}
+.smart {
+  color: #2e2f33;
+  background-color: #e6efff;
+}
+.schedule,
+.surplus {
+  color: #2e2f33;
+  background-color: #e6efff;
 }
 
 .bottom-nav {

@@ -13,55 +13,57 @@
         <p><span class="ddorf">Ddorf-</span>energy.de</p>
       </div>
       <div class="widjet">
-        <div class="widjet-link">
+        <div class="widjet-link active">
           <img src="/home-img/header-ico/home.svg" alt="" />
-          <a href="">Home</a>
+          <a href="/">Home</a>
         </div>
         <div class="widjet-link">
           <img src="/home-img/header-ico/cast.svg" alt="" />
-          <a href="">Forecast</a>
+          <a href="/forecast.html">Forecast</a>
         </div>
         <div class="widjet-link">
           <img src="/home-img/header-ico/history.svg" alt="" />
-          <a href="">History</a>
+          <a href="/history.html">History</a>
         </div>
       </div>
     </div>
+
     <div class="dashboard">
       <div class="device house">
         <img src="/home-img/home.svg" alt="House" />
-        <div class="home-pow">395 W</div>
+        <div class="home-pow" id="homePower">395 W</div>
       </div>
       <div class="device grid">
         <img src="/home-img/grid.svg" alt="Grid" />
-        <div class="grid-poweer">25,46 ct</div>
+        <div class="grid-poweer" id="gridPrice">25,46 ct</div>
       </div>
       <div class="device inverter">
         <img src="/home-img/inverter.svg" alt="Inverter" />
-        <div class="inter-power">
+        <div class="inter-power" id="inverterPower">
           521 W
           <div class="on-of">on <span class="toogle"></span></div>
         </div>
       </div>
       <div class="device solar">
         <img src="/home-img/solar.svg" />
-        <div class="solar-pow">1604 W</div>
+        <div class="solar-pow" id="solarPower">1604 W</div>
       </div>
       <div class="device ac">
         <img src="/home-img/ac.svg" alt="AC" />
-        <div class="ac-power">395 W</div>
+        <div class="ac-power" id="acPower">395 W</div>
       </div>
       <div class="device battery">
         <img src="/home-img/battery.svg" alt="Battery" />
-        <div class="battery-power">1604 W</div>
+        <div class="battery-power" id="batteryPower">1604 W</div>
       </div>
       <div class="device ev">
         <img src="/home-img/ev.svg" alt="EV" />
-        <div class="ev-power">1604W</div>
-        <div class="ev-battery">
+        <div class="ev-power" id="evPower">1604 W</div>
+        <div class="ev-battery" id="evBattery">
           <img src="/home-img/charg.svg" alt="" class="charg" />58%
         </div>
       </div>
+
       <div class="lines">
         <img src="/home-img/vectors/first.svg" alt="" class="first-vector" />
         <img src="/home-img/vectors/second.svg" alt="" class="second-vector" />
@@ -71,6 +73,7 @@
         <img src="/home-img/vectors/six.svg" alt="" class="six-vector" />
       </div>
     </div>
+
     <div class="mobile-lines">
       <img src="/home-img/mobile-img/first.svg" alt="" class="mobile-first" />
       <img src="/home-img/mobile-img/second.svg" alt="" class="mobile-second" />
@@ -79,6 +82,7 @@
       <img src="/home-img/mobile-img/five.svg" alt="" class="mobile-five" />
       <img src="/home-img/mobile-img/six.svg" alt="" class="mobile-six" />
     </div>
+
     <div class="bottom-nav">
       <div class="nav-dash">
         <img src="/home-img/dashboard.svg" alt="" />
@@ -90,8 +94,61 @@
       </div>
       <div class="nav-dash">
         <img src="/home-img/settings.svg" alt="" />
-        <a href="#">Settings</a>
+        <a href="account.html">Settings</a>
       </div>
     </div>
+
+    <script>
+      const data = {
+        homePower: "395 W",
+        gridPrice: "25,46 ct",
+        inverterPower: "521 W",
+        inverterStatus: true,
+        solarPower: "1604 W",
+        acPower: "395 W",
+        batteryPower: "1604 W",
+        evPower: "1604 W",
+        evBattery: 58,
+      };
+
+      function updateDashboard(data) {
+        document.getElementById("homePower").textContent = data.homePower;
+        document.getElementById("gridPrice").textContent = data.gridPrice;
+
+        const inverter = document.getElementById("inverterPower");
+        inverter.innerHTML = `
+          ${data.inverterPower}
+          <div class="on-of">
+            ${data.inverterStatus ? "on" : "off"} <span class="toogle"></span>
+          </div>
+        `;
+
+        document.getElementById("solarPower").textContent = data.solarPower;
+        document.getElementById("acPower").textContent = data.acPower;
+        document.getElementById("batteryPower").textContent = data.batteryPower;
+        document.getElementById("evPower").textContent = data.evPower;
+
+        document.getElementById("evBattery").innerHTML = `
+          <img src="/home-img/charg.svg" alt="" class="charg" />${data.evBattery}%
+        `;
+      }
+
+      updateDashboard(data);
+
+      // Пример обновления данных (можно заменить на fetch API)
+      setInterval(() => {
+        // Эмуляция обновления данных
+        data.evBattery = data.evBattery >= 100 ? 0 : data.evBattery + 1;
+        data.inverterStatus = !data.inverterStatus;
+        updateDashboard(data);
+      }, 5000);
+
+      // Подсветка активной ссылки
+      document.querySelectorAll(".widjet-link a").forEach((link) => {
+        if (link.getAttribute("href") === window.location.pathname) {
+          link.parentElement.classList.add("active");
+        }
+      });
+    </script>
   </body>
 </html>

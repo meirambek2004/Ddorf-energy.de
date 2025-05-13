@@ -1,0 +1,270 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #333;
+}
+.content {
+  background-color: #eceef6;
+  border-radius: 20px;
+  margin: 5px 20px;
+  padding: 1px 20px;
+  box-sizing: border-box;
+  height: 75vh;
+}
+.top-bar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo .blue {
+  color: #1e90ff;
+  font-weight: bold;
+}
+.logo .black {
+  color: black;
+  font-weight: bold;
+}
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 427px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  background-color: #eceef6;
+  margin-left: 130px;
+}
+.menu a {
+  text-decoration: none;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+}
+.menu-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  color: #808492;
+}
+.name {
+  width: calc(50% - 10px); /* два в ряд, с учетом gap */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.coun {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.country,
+.city,
+.zip {
+  flex: 1; /* или можно задать проценты вручную */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+input {
+  height: 50px;
+  background: none;
+  border: 2px solid #c7cbd8;
+  border-radius: 10px;
+}
+select {
+  height: 55px;
+  background: none;
+  border: 2px solid #c7cbd8;
+  border-radius: 10px;
+  padding: 0 15px;
+  color: #333;
+  font-size: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+.upload {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+}
+button {
+  width: 159px;
+  height: 50px;
+  border: none;
+  background-color: #007aff;
+  color: #fff;
+  border-radius: 10px;
+}
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-bar {
+  background: #eef2fa;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 465px;
+  height: 64px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.bottom-nav a img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.doght {
+  position: absolute;
+  top: 65%;
+  left: 95%;
+}
+.county-doght {
+  position: absolute;
+  top: 65%;
+  left: 92%;
+}
+.bottom-nav a.active img {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%);
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 80px;
+  }
+
+  .top-bar {
+    margin: 10px;
+    background-color: #eceef6;
+    border-radius: 10px;
+    padding: 4px;
+  }
+  .logo p {
+    display: none;
+  }
+
+  .menu {
+    width: 310px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    margin: 0;
+    gap: 40px;
+  }
+  .menu-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .menu a {
+    margin: 0;
+    padding: 0;
+  }
+
+  .settings-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 10px;
+    left: -10px;
+    width: 100%;
+    margin: 0 10px;
+  }
+
+  .bottom-bar {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 12px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+  .content {
+    height: 100%;
+    margin: 12px;
+    padding: 12px;
+    padding-bottom: 80px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .coun {
+    display: flex;
+    flex-direction: column;
+  }
+  #acc-card {
+    height: 90px;
+  }
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 24px;
+  }
+  input {
+    width: 310px;
+    height: 45px;
+  }
+  select {
+    height: 50px;
+  }
+}

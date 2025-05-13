@@ -1,0 +1,143 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #333;
+}
+.content {
+  background-color: #eceef6;
+  border-radius: 20px;
+  margin: 5px 20px;
+  padding: 1px 20px;
+  box-sizing: border-box;
+  height: 75vh;
+}
+.top-bar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo .blue {
+  color: #1e90ff;
+  font-weight: bold;
+}
+.logo .black {
+  color: black;
+  font-weight: bold;
+}
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 427px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  background-color: #eceef6;
+  margin-left: 130px;
+}
+.menu a {
+  text-decoration: none;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+}
+.menu-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.current {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  color: #808492;
+}
+.curr {
+  width: calc(50% - 10px); /* два в ряд, с учетом gap */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+input {
+  width: 560px;
+  height: 50px;
+  border-radius: 10px;
+  background: none;
+  border: 2px solid #c7cbd8;
+}
+.verif {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+button {
+  width: 206px;
+  height: 50px;
+  background-color: #007aff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+}
+.bottom-nav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-bar {
+  background: #eef2fa;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 465px;
+  height: 64px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.bottom-nav a {
+  text-decoration: none;
+  flex-direction: row;
+  gap: 5px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.doght {
+  position: absolute;
+  top: 65%;
+  left: 92%;
+}
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.bottom-nav a.active img {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%);
+}

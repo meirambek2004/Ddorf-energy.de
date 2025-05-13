@@ -50,7 +50,12 @@ body {
 }
 .widjet-link a {
   text-decoration: none;
+  color: black;
   font-size: 16px;
+}
+.widjet-link.active img {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%);
 }
 
 .dashboard {

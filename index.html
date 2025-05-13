@@ -14,20 +14,62 @@
       </div>
     </div>
     <div class="login-container">
-      <form action="home.html" method="get">
-        <input type="text" placeholder="Username or email" />
+      <form id="login-form">
+        <input
+          type="text"
+          id="username"
+          placeholder="Username or email"
+          required
+        />
         <div class="password-container">
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
         </div>
         <div class="links">
           <a href="/newAccount.html">No account?</a>
           <a href="#">Forgot password?</a>
         </div>
-        <button>
+        <button type="submit">
           <img src="/index-img/login.svg" alt="Login icon" />
           Log In
         </button>
       </form>
     </div>
+
+    <script>
+      const credentials = [
+        {
+          email: "admin@ufamax.eu",
+          password: "iKtpPdzdiKJrSVC",
+          role: "admin",
+        },
+        { email: "guest@gmail.com", password: "123", role: "user" },
+        { email: "guest@gmail.com", password: "789", role: "readonly" },
+      ];
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+
+          const user = credentials.find(
+            (u) => u.email === email && u.password === password
+          );
+
+          if (user) {
+            alert("Welcome, " + user.role);
+            window.location.href = "/home.html";
+          } else {
+            alert("Incorrect login or password");
+          }
+        });
+    </script>
   </body>
 </html>

@@ -10,20 +10,22 @@
     <header class="top-bar">
       <div class="logo">
         <img src="/index-img/icon.svg" alt="Logo" />
-        <p><span class="blue">Ddorf-</span>energy.de</p>
+        <p>
+          <span class="black">Ddorf-</span> <span class="blue">energy.de</span>
+        </p>
       </div>
       <nav class="menu">
         <div class="menu-nav">
           <img src="/home-img/header-ico/home.svg" alt="Home" />
-          <a href="#">Home</a>
+          <a href="home.html">Home</a>
         </div>
         <div class="menu-nav">
           <img src="/home-img/header-ico/cast.svg" alt="Forecast" />
-          <a href="#">Forecast</a>
+          <a href="/forecast.html">Forecast</a>
         </div>
         <div class="menu-nav">
           <img src="/home-img/header-ico/history.svg" alt="History" />
-          <a href="#">History</a>
+          <a href="/history.html">History</a>
         </div>
       </nav>
     </header>
@@ -97,7 +99,9 @@
               <button class="smart">Smart</button>
             </div>
             <div class="status-row">
-              <button class="settings-btn">⚙ Settings</button>
+              <button class="settings-btn" id="wallbox-settings">
+                ⚙ Settings
+              </button>
             </div>
           </div>
           <div class="device-card">
@@ -110,7 +114,9 @@
               <button class="smart">Smart</button>
             </div>
             <div class="status-row">
-              <button class="settings-btn">⚙ Settings</button>
+              <button class="settings-btn" id="heatpump-settings">
+                ⚙ Settings
+              </button>
             </div>
           </div>
           <div class="device-card">
@@ -123,20 +129,55 @@
               <button class="smart">Smart</button>
             </div>
             <div class="status-row">
-              <button class="settings-btn">⚙ Settings</button>
+              <button class="settings-btn" id="switch1-settings">
+                ⚙ Settings
+              </button>
             </div>
           </div>
         </div>
       </section>
     </main>
     <div class="border-line"></div>
-
     <footer class="bottom-nav">
       <div class="bottom-bar">
-        <a href="#"><img src="/home-img/dashboard.svg" alt="" />Dashboard</a>
-        <a href="#"><img src="/home-img/devices.svg" alt="" />Devices</a>
-        <a href="#"><img src="/home-img/settings.svg" alt="" />Settings</a>
+        <a href="#" data-page="dashboard"
+          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
+        >
+        <a href="devices.html" data-page="devices"
+          ><img src="/home-img/devices.svg" alt="" /><span>Devices</span></a
+        >
+        <a href="account.html" data-page="subsTrial"
+          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
+        >
       </div>
     </footer>
   </body>
+  <script>
+    const currentPath = window.location.pathname.split("/").pop();
+
+    document.querySelectorAll(".bottom-bar a").forEach((link) => {
+      const linkPath = link.getAttribute("href");
+      if (linkPath === currentPath) {
+        link.classList.add("active");
+      }
+    });
+    const wallboxSettingsBtn = document.getElementById("wallbox-settings");
+    if (wallboxSettingsBtn) {
+      wallboxSettingsBtn.addEventListener("click", () => {
+        window.location.href = "wallbox.html";
+      });
+    }
+    const heatPumpSettingsBtn = document.getElementById("heatpump-settings");
+    if (heatPumpSettingsBtn) {
+      heatPumpSettingsBtn.addEventListener("click", () => {
+        window.location.href = "heatPump.html";
+      });
+    }
+    const switch1SettingsBtn = document.getElementById("switch1-settings");
+    if (switch1SettingsBtn) {
+      switch1SettingsBtn.addEventListener("click", () => {
+        window.location.href = "switch.html";
+      });
+    }
+  </script>
 </html>

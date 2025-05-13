@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ddorf-energy.de - Switch 1 Settings</title>
+    <link rel="stylesheet" href="/style/switch.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="logo">
+        <img src="/index-img/icon.svg" alt="Logo" />
+        <p>
+          <span class="black">Ddorf-</span> <span class="blue">energy.de</span>
+        </p>
+      </div>
+      <nav class="menu">
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/home.svg" alt="Home" />
+          <a href="home.html">Home</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/cast.svg" alt="Forecast" />
+          <a href="/forecast.html">Forecast</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/history.svg" alt="History" />
+          <a href="/history.html">History</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="content">
+      <div class="settings-header">
+        <div class="settings-title">
+          <img id="change-button" src="/newAcc-img/button.svg" alt="" />
+          Switch 1 Settings
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div class="setting-item">
+          <label>Rated power</label>
+          <div class="input-group">
+            <input type="text" value="300 W" />
+          </div>
+        </div>
+        <div class="setting-item">
+          <label>Minimum On-Time</label>
+          <div class="input-group">
+            <input type="text" value="2" />
+          </div>
+        </div>
+        <div class="setting-item">
+          <label>Minimum Off-Time</label>
+          <div class="input-group">
+            <input type="text" value="1" />
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-section">
+        <label>Schedule</label>
+
+        <div class="schedule-actions">
+          <button class="add-button on">
+            <svg viewBox="0 0 24 24" fill="#70D058">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H13V17H11V13H7V11H11V7H13V11H17V13Z"
+              />
+            </svg>
+            Add (On)
+          </button>
+          <button class="add-button off">
+            <svg viewBox="0 0 24 24" fill="#EF735D">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H7V11H17V13Z"
+              />
+            </svg>
+            Add (Off)
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bottom-nav">
+      <div class="bottom-bar">
+        <a href="#" data-page="dashboard"
+          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
+        >
+        <a href="devices.html" data-page="devices"
+          ><img src="/home-img/decice-ico.svg"" alt="" /><span>Devices</span></a
+        >
+        <a href="account.html" data-page="subsTrial"
+          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
+        >
+      </div>
+    </footer>
+  </body>
+</html>

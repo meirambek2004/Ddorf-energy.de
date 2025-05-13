@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/history.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="logo">
+        <img src="/index-img/icon.svg" alt="Logo" />
+        <p>
+          <span class="black">Ddorf-</span> <span class="blue">energy.de</span>
+        </p>
+      </div>
+      <nav class="menu">
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/home.svg" alt="Home" />
+          <a href="home.html">Home</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/home-img/header-ico/cast.svg" alt="Forecast" />
+          <a href="/forecast.html">Forecast</a>
+        </div>
+        <div class="menu-nav">
+          <img src="/index-img/history.svg" alt="History" />
+          <a href="#">History</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="content">
+        <div class="head">
+          <img id="subscription-button" src="/newAcc-img/button.svg" alt="" />
+          <p>History</p>
+        </div>
+        <div class="hist">
+          <div class="alp">
+            <p>T</p>
+            <p>M</p>
+            <p>J</p>
+            <p style="background-color: #daf8d3">I</p>
+          </div>
+          <div class="month">
+            <img src="/newAcc-img/button.svg" alt="" />
+            <p>Februar</p>
+            <p>Marsch</p>
+            <p>April</p>
+            <p style="background-color: #daf8d3">Today</p>
+            <img src="/index-img/rightbutton.svg" alt="" />
+            <img src="/index-img/calendar.svg" alt="" />
+          </div>
+        </div>
+        <main class="container">
+          <section class="bg-white p-4 rounded-lg shadow">
+            <!-- Chart -->
+            <div class="chart-container">
+              <canvas
+                id="forecastChart"
+                class="absolute inset-0 w-full h-full"
+              ></canvas>
+            </div>
+
+            <!-- Legend -->
+          </section>
+        </main>
+        <div class="direct">
+          <button style="background-color: #daf8d3">Direct consumption</button>
+          <button style="background-color: #e6efff">Grid consumption</button>
+          <button style="background-color: #f8e4d3">Battery discharge</button>
+          <button style="background-color: #adedff">Heat pump</button>
+          <button style="background-color: #d3f8ee">Switch 1</button>
+          <button style="background-color: #ffecad">Switch 2</button>
+        </div>
+      </div>
+    </main>
+    <footer class="bottom-nav">
+      <div class="bottom-bar">
+        <a href="#" data-page="dashboard"
+          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
+        >
+        <a href="devices.html" data-page="devices"
+          ><img src="/home-img/devices.svg" alt="" /><span>Devices</span></a
+        >
+        <a href="account.html" data-page="subsTrial"
+          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
+        >
+      </div>
+    </footer>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById("forecastChart").getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["04 h", "08 h", "12 h", "16 h", "20 h"],
+        datasets: [
+          {
+            label: "Generation",
+            data: [5, 7, 9, 17.6, 8, 10, 7],
+            borderColor: "green",
+            backgroundColor: "rgba(34,197,94,0.2)",
+            tension: 0.4,
+            fill: true,
+          },
+          {
+            label: "Grid Supply",
+            data: [0, 0, 0, 0, 0, 0, 0],
+            borderColor: "blue",
+            backgroundColor: "rgba(59,130,246,0.2)",
+            tension: 0.4,
+            fill: false,
+          },
+          {
+            label: "Consumption",
+            data: [2, 3, 4, 0, 3, 4, 2],
+            borderColor: "red",
+            backgroundColor: "rgba(239,68,68,0.2)",
+            tension: 0.4,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: false, // ❌ скрывает подписи к линиям
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return context.raw.toFixed(1) + " kW";
+              },
+            },
+          },
+        },
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: "kW",
+            },
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  </script>
+</html>

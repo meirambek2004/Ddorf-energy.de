@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/style/subsTrial.css">
+    <link rel="stylesheet" href="/style/subsTrial.css" />
   </head>
   <body>
     <header class="top-bar">
@@ -38,7 +38,7 @@
         <div class="current">
           <div class="subs">
             <p>Current Subscription</p>
-            <div class="days">
+            <div class="days" id="subscriptionDays">
               <div class="trial">
                 <p>Trial 30 days</p>
                 <p class="left">
@@ -48,7 +48,7 @@
                 </p>
               </div>
               <div class="buy">
-                <button>
+                <button id="buyPremiumBtn">
                   <img src="/premium-img/extend.svg" alt="" />Buy Premium
                 </button>
               </div>
@@ -94,14 +94,28 @@
         window.location.href = "account.html";
       });
 
-    document
-      .getElementById("subscription-button")
-      .addEventListener("click", function () {
-        window.location.href = "account.html";
-      });
+    const buyPremiumBtn = document.getElementById("buyPremiumBtn");
+    const subscriptionDays = document.getElementById("subscriptionDays");
 
-    document.querySelector("button").addEventListener("click", function () {
-      window.location.href = "subsPremium.html";
+    buyPremiumBtn.addEventListener("click", function () {
+      subscriptionDays.style.backgroundColor = "#F8E4D3";
+      subscriptionDays.innerHTML = `
+        <div class="trial">
+          <img src="/premium-img/premium.svg" alt="Premium Icon" />
+          <p class="">Premium</p>
+          <p class="date">until 2025.11.08</p>
+        </div>
+        <div class="buy">
+          <p class="left">28 days has left</p>
+          <button class="extend">
+            <img src="/premium-img/extend.svg" alt="" />Extend
+          </button>
+        </div>
+      `;
+      const extendBtn = subscriptionDays.querySelector("button.extend");
+      extendBtn.addEventListener("click", function () {
+        window.location.href = "subsPremium.html";
+      });
     });
   </script>
 </html>

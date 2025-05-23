@@ -88,6 +88,7 @@ body {
   font-size: 16px;
   font-weight: 500;
   color: #003087;
+  width: 30%;
   margin-bottom: 16px;
 }
 
@@ -110,8 +111,8 @@ body {
   border-radius: 8px;
   font-size: 14px;
   color: #003087;
-  text-align: right;
-  width: 100px;
+  text-align: center;
+  width: 80px;
 }
 
 .input-group .cost {
@@ -197,7 +198,7 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  margin: 0;
 }
 .bottom-nav {
   margin-top: 20px;
@@ -223,6 +224,198 @@ body {
   display: flex;
   align-items: center;
   font-size: 0.9rem;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.slider {
+  width: 50px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.thumb {
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  transition: left 0.3s;
+}
+
+.toggle.active .slider {
+  background: #00c853;
+}
+
+.toggle.active .thumb {
+  left: 27px;
+}
+#charging-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+}
+.hidden {
+  display: none;
+}
+.range-wrapper {
+  position: relative;
+  width: 88%;
+  height: 30px; /* общая высота обёртки */
+  display: flex;
+  align-items: center;
+}
+
+.range-wrapper input[type="range"] {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  appearance: none;
+  background: transparent;
+  pointer-events: none; /* отключает перехват событий на треке */
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+/* Тонкий трек */
+.range-wrapper input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+}
+.range-wrapper input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: transparent;
+}
+
+/* Маленький thumb */
+.range-wrapper input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all; /* разрешает перетаскивание */
+  margin-top: -4px; /* центрирует на тонком треке */
+}
+.range-wrapper input[type="range"]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/* Нижняя заливка трека */
+.range-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ccc;
+  border-radius: 1px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Заливка между min и max */
+.range-fill {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  background: #9c27b0;
+  border-radius: 1px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.calendar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  max-width: 360px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 460px;
+  border: none;
+  border-radius: 8px;
+}
+
+.modal .close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#subscription-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
 }
 @media (max-width: 600px) {
   body {

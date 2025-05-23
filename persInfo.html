@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/style/persInfo.css">
+    <link rel="stylesheet" href="/style/persInfo.css" />
   </head>
   <body>
     <header class="top-bar">
@@ -59,13 +59,21 @@
           <div class="coun">
             <div class="country">
               <p>Country</p>
-              <select>
-                <option value=""></option>
-                <option value="de">Germany</option>
-                <option value="us">United States</option>
-                <option value="fr">France</option>
-                <option value="kz">Kazakhstan</option>
-              </select>
+              <div class="custom-select">
+                <div class="select-selected" tabindex="0">Select a country</div>
+                <div class="select-items">
+                  <div data-value="de">Germany</div>
+                  <div data-value="us">United States</div>
+                  <div data-value="fr">France</div>
+                  <div data-value="kz">Kazakhstan</div>
+                </div>
+              </div>
+              <img
+                src="/newAcc-img/hand-icon.svg"
+                alt=""
+                width="16px"
+                class="county-doght"
+              />
             </div>
             <div class="city">
               <p>City</p>
@@ -127,29 +135,59 @@
         >
       </div>
     </footer>
-  </body>
-  <script>
-    const pageFromPath = location.pathname;
+    <script>
+      // JavaScript для кастомного выпадающего списка
+      const customSelect = document.querySelector(".custom-select");
+      const selectSelected = customSelect.querySelector(".select-selected");
+      const selectItems = customSelect.querySelector(".select-items");
 
-    document.querySelectorAll(".bottom-bar a").forEach((link) => {
-      const page = link.dataset.page;
-
-      if (
-        (page === "dashboard" && pageFromPath.includes("dashboard")) ||
-        (page === "devices" && pageFromPath.includes("devices")) ||
-        (page === "subsTrial" &&
-          (pageFromPath.includes("changPassw") ||
-            pageFromPath.includes("subsPremium") ||
-            pageFromPath.includes("/subsTrial.html") ||
-            pageFromPath.includes("persInfo")))
-      ) {
-        link.classList.add("active");
-      }
-    });
-    document
-      .getElementById("change-button")
-      .addEventListener("click", function () {
-        window.location.href = "account.html";
+      selectSelected.addEventListener("click", () => {
+        selectItems.classList.toggle("show");
       });
-  </script>
+
+      selectSelected.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          selectItems.classList.toggle("show");
+        }
+      });
+
+      selectItems.querySelectorAll("div").forEach((item) => {
+        item.addEventListener("click", () => {
+          selectSelected.textContent = item.textContent;
+          selectItems.classList.remove("show");
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!customSelect.contains(e.target)) {
+          selectItems.classList.remove("show");
+        }
+      });
+
+      // Существующий JavaScript для навигации
+      const pageFromPath = location.pathname;
+
+      document.querySelectorAll(".bottom-bar a").forEach((link) => {
+        const page = link.dataset.page;
+
+        if (
+          (page === "dashboard" && pageFromPath.includes("dashboard")) ||
+          (page === "devices" && pageFromPath.includes("devices")) ||
+          (page === "subsTrial" &&
+            (pageFromPath.includes("changPassw") ||
+              pageFromPath.includes("subsPremium") ||
+              pageFromPath.includes("/subsTrial.html") ||
+              pageFromPath.includes("persInfo")))
+        ) {
+          link.classList.add("active");
+        }
+      });
+
+      document
+        .getElementById("change-button")
+        .addEventListener("click", function () {
+          window.location.href = "account.html";
+        });
+    </script>
+  </body>
 </html>

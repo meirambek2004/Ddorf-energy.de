@@ -70,7 +70,10 @@
             />
           </div>
           <div class="verify">
-            <button>Send verification code</button>
+            <div id="verify-container"></div>
+            <button id="send-verify-btn">
+              <img src="/newAcc-img/ico.svg" alt="" />Send verification code
+            </button>
           </div>
         </div>
       </div>
@@ -112,5 +115,63 @@
       .addEventListener("click", function () {
         window.location.href = "account.html";
       });
+
+    const button = document.getElementById("send-verify-btn");
+    const container = document.getElementById("verify-container");
+
+    button.addEventListener("click", function () {
+      const existingInput = document.getElementById("verify-input");
+
+      if (!existingInput) {
+        // Создаем поле, но сначала без класса "show"
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Enter verify code";
+        input.id = "verify-input";
+        input.style.width = "90px";
+        input.style.height = "40px";
+        input.style.border = "2px solid #c7cbd8";
+        input.style.borderRadius = "10px";
+        input.style.padding = "0 10px";
+        input.style.marginRight = "10px";
+        input.style.fontSize = "12px";
+
+        container.appendChild(input);
+
+        // Даем браузеру время применить стили, затем добавляем класс show для анимации
+        requestAnimationFrame(() => {
+          input.classList.add("show");
+        });
+
+        button.innerHTML = `Confirm changes`;
+        button.style.width = "120px";
+        button.style.height = "50px";
+      } else {
+        const code = existingInput.value.trim();
+        if (code !== "") {
+          // Анимируем скрытие input и кнопки
+          existingInput.classList.remove("show");
+          button.style.transition = "opacity 0.4s ease";
+          button.style.opacity = "0";
+
+          // После анимации скрываем и показываем сообщение
+          setTimeout(() => {
+            container.innerHTML = ""; // убираем input
+            button.remove(); // убираем кнопку
+
+            const successMsg = document.createElement("p");
+            successMsg.textContent = "Information updated";
+            successMsg.style.fontSize = "16px";
+            successMsg.style.fontWeight = "bold";
+            successMsg.style.color = "green";
+            successMsg.style.marginTop = "10px";
+            successMsg.classList.add("show");
+            container.appendChild(successMsg);
+          }, 400);
+        } else {
+          alert("Please enter the verification code.");
+        }
+      }
+    });
   </script>
 </html>

@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/style/heatPump.css">
+    <link rel="stylesheet" href="/style/heatPump.css" />
   </head>
   <body>
     <header class="top-bar">
@@ -35,7 +35,14 @@
     </header>
 
     <main class="container">
-      <div class="settings-title">⬅ Heat pump Settings</div>
+      <div class="settings-title">
+        <img
+          src="/newAcc-img/button.svg"
+          alt="Settings icon"
+          id="subscription-button"
+        />
+        <span>Heat pump Settings</span>
+      </div>
 
       <div class="content-flex">
         <div class="left-settings">
@@ -44,13 +51,15 @@
             <div class="row">
               <span>Hot water tank</span>
               <div class="input-box">
-                ✏️ <input type="text" value="19 °C" />
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="19 °C" />
               </div>
             </div>
             <div class="row">
               <span>Buffer tank</span>
               <div class="input-box">
-                ✏️ <input type="text" value="16 °C" />
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="16 °C" />
               </div>
             </div>
           </div>
@@ -60,13 +69,15 @@
             <div class="row">
               <span>Hot water tank</span>
               <div class="input-box">
-                ✏️ <input type="text" value="70 °C" />
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="70 °C" />
               </div>
             </div>
             <div class="row">
               <span>Buffer tank</span>
               <div class="input-box">
-                ✏️ <input type="text" value="75 °C" />
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="75 °C" />
               </div>
             </div>
           </div>
@@ -76,23 +87,194 @@
             <div class="row">
               <span>Hot water tank</span>
               <div class="input-box">
-                ✏️ <input type="text" value="45 °C" />
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="45 °C" />
               </div>
             </div>
             <div class="row">
               <span>Buffer tank</span>
               <div class="input-box">
-                ✏️ <input type="text" value="42 °C" />
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="42 °C" />
+              </div>
+            </div>
+          </div>
+          <div class="setting-group">
+            <h4>Advanced</h4>
+            <div class="row">
+              <span>Advanced Minimum On-Time</span>
+              <div class="input-box">
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="1 min" />
+              </div>
+            </div>
+            <div class="row">
+              <span>Advanced Minimum Off-Time</span>
+              <div class="input-box">
+                <img src="/newAcc-img/input.svg" alt="Edit icon" />
+                <input type="text" value="2 min" />
               </div>
             </div>
           </div>
         </div>
 
         <div class="schedule schedule-box">
-          <h4>Schedule</h4>
-          <div class="schedule-btns">
-            <div class="btn add">➕ Add (On)</div>
-            <div class="btn remove">➖ Add (Off)</div>
+          <div class="schedule-header">
+            <h4>Schedule</h4>
+            <div class="schedule-btns">
+              <div class="btn add">
+                <img src="/ico-img/add.svg" alt="Add icon" />
+                <span>Add (On)</span>
+              </div>
+              <div class="btn remove">
+                <img src="/ico-img/remove.svg" alt="Remove icon" />
+                <span>Add (Off)</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="scheduleContent" class="collapsed">
+            <div class="card" id="scheduleCard">
+              <div id="shed-head">
+                <div class="top-row">
+                  <span>Schedule</span>
+                  <button class="toggle-btn toggle-on">On</button>
+                </div>
+
+                <div class="mode-toggle">
+                  <button class="toggle-btn toggle-off" id="one-time-btn">
+                    <img src="/ico-img/watch.svg" alt="One-time icon" />
+                    <span>one time</span>
+                  </button>
+                  <button class="toggle-btn toggle-on" id="repeat-btn">
+                    <img src="/ico-img/repeat.svg" alt="Repeat icon" />
+                    <span>repeat</span>
+                  </button>
+                  <img
+                    src="/ico-img/delete.svg"
+                    alt="Delete icon"
+                    id="delete-icon"
+                  />
+                </div>
+              </div>
+
+              <div class="days" id="days-section">
+                <button class="active">Mo</button>
+                <button class="active">Di</button>
+                <button class="active">Mi</button>
+                <button class="active">Do</button>
+                <button class="active">Fr</button>
+                <button>Sa</button>
+                <button>So</button>
+              </div>
+              <div class="time-range-container hidden" id="time-range-section">
+                <div class="time-track"></div>
+                <div class="time-fill" id="time-fill-bar"></div>
+                <input
+                  type="range"
+                  id="time-range-input"
+                  min="0"
+                  max="1439"
+                  value="950"
+                  step="1"
+                />
+                <div class="time-markers">
+                  <span>00:00</span>
+                  <span>23:59</span>
+                </div>
+              </div>
+
+              <div class="section">
+                <div class="input-group">
+                  <label>SoC Battery charge level</label>
+                  <div class="toggle" id="soc-toggle">
+                    <span class="toggle-state">off</span>
+                    <div class="slider">
+                      <div class="thumb"></div>
+                    </div>
+                    <span class="toggle-opposite"></span>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label>Threshold</label>
+                  <div class="toggle" id="soc-toggle-thr">
+                    <span class="toggle-state">off</span>
+                    <div class="slider">
+                      <div class="thumb"></div>
+                    </div>
+                    <span class="toggle-opposite"></span>
+                  </div>
+                </div>
+                <div class="slider-row hidden" id="range-group-1">
+                  <div class="range-container">
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value="50"
+                      id="range1"
+                    />
+                    <span class="value-label" id="label1">50-80 %</span>
+                  </div>
+                </div>
+                <div class="slider-row hidden" id="range-group-2">
+                  <div class="range-container">
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value="50"
+                      id="range2"
+                    />
+                    <span class="value-label" id="label2">50-80 %</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section">
+                <div class="input-group">
+                  <label>Price Signal</label>
+                  <div class="toggle" id="price-toggle">
+                    <span class="toggle-state">off</span>
+                    <div class="slider">
+                      <div class="thumb"></div>
+                    </div>
+                    <span class="toggle-opposite"></span>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label>Threshold</label>
+                  <div class="toggle" id="threshold-toggle-2">
+                    <span class="toggle-state">off</span>
+                    <div class="slider">
+                      <div class="thumb"></div>
+                    </div>
+                    <span class="toggle-opposite"></span>
+                  </div>
+                </div>
+                <div class="input-group hidden" id="threshold-range-group">
+                  <div class="range-wrapper">
+                    <div class="range-track"></div>
+                    <div class="range-fill" id="range-fill"></div>
+                    <input
+                      type="range"
+                      id="range-min"
+                      min="0"
+                      max="100"
+                      value="30"
+                    />
+                    <input
+                      type="range"
+                      id="range-max"
+                      min="0"
+                      max="100"
+                      value="80"
+                    />
+                  </div>
+                  <span id="range-display">30–80 %</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -101,15 +283,351 @@
     <footer class="bottom-nav">
       <div class="bottom-bar">
         <a href="#" data-page="dashboard"
-          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
+          ><img src="/home-img/dashboard.svg" alt="Dashboard icon" /><span
+            >Dashboard</span
+          ></a
         >
         <a href="devices.html" data-page="devices"
-          ><img src="/home-img/decice-ico.svg" alt="" /><span>Devices</span></a
+          ><img src="/home-img/decice-ico.svg" alt="Devices icon" /><span
+            >Devices</span
+          ></a
         >
         <a href="account.html" data-page="subsTrial"
-          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
+          ><img src="/home-img/settings.svg" alt="Settings icon" /><span
+            >Settings</span
+          ></a
         >
       </div>
     </footer>
+
+    <script>
+      // Define the templates for the two modes
+      const onModeTemplate = `
+        <div id="shed-head">
+          <div class="top-row">
+            <span>Schedule</span>
+            <button class="toggle-btn toggle-on">On</button>
+          </div>
+          <div class="mode-toggle">
+            <img src="/ico-img/delete.svg" alt="Delete icon" id="delete-icon" />
+          </div>
+        </div>
+        <div class="section">
+          <div class="input-group">
+            <label>SoC Battery charge level</label>
+            <div class="toggle" id="soc-toggle">
+              <span class="toggle-state">off</span>
+              <div class="slider">
+                <div class="thumb"></div>
+              </div>
+              <span class="toggle-opposite"></span>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Threshold</label>
+            <div class="toggle" id="soc-toggle-thr">
+              <span class="toggle-state">off</span>
+              <div class="slider">
+                <div class="thumb"></div>
+              </div>
+              <span class="toggle-opposite"></span>
+            </div>
+          </div>
+          <div class="slider-row hidden" id="range-group-1">
+            <div class="range-container">
+              <input type="range" min="0" max="100" value="50" id="range1" />
+              <span class="value-label" id="label1">50-80 %</span>
+            </div>
+          </div>
+          <div class="slider-row hidden" id="range-group-2">
+            <div class="range-container">
+              <input type="range" min="0" max="100" value="50" id="range2" />
+              <span class="value-label" id="label2">50-80 %</span>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="input-group">
+            <label>Price Signal</label>
+            <div class="toggle" id="price-toggle">
+              <span class="toggle-state">off</span>
+              <div class="slider">
+                <div class="thumb"></div>
+              </div>
+              <span class="toggle-opposite"></span>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Threshold</label>
+            <div class="toggle" id="threshold-toggle-2">
+              <span class="toggle-state">off</span>
+              <div class="slider">
+                <div class="thumb"></div>
+              </div>
+              <span class="toggle-opposite"></span>
+            </div>
+          </div>
+          <div class="input-group hidden" id="threshold-range-group">
+            <div class="range-wrapper">
+              <div class="range-track"></div>
+              <div class="range-fill" id="range-fill"></div>
+              <input type="range" id="range-min" min="0" max="100" value="30" />
+              <input type="range" id="range-max" min="0" max="100" value="80" />
+            </div>
+            <span id="range-display">30–80 %</span>
+          </div>
+        </div>
+      `;
+
+      const offModeTemplate = `
+        <div id="shed-head">
+          <div class="top-row">
+            <span>Schedule</span>
+            <button class="toggle-btn toggle-off">Off</button>
+          </div>
+          <div class="mode-toggle">
+            <button class="toggle-btn toggle-off" id="one-time-btn">
+              <img src="/ico-img/watch.svg" alt="One-time icon" />
+              <span>one time</span>
+            </button>
+            <button class="toggle-btn toggle-on" id="repeat-btn">
+              <img src="/ico-img/repeat.svg" alt="Repeat icon" />
+              <span>repeat</span>
+            </button>
+            <img src="/ico-img/delete.svg" alt="Delete icon" id="delete-icon" />
+          </div>
+        </div>
+        <div class="days" id="days-section">
+          <button class="active">Mo</button>
+          <button class="active">Di</button>
+          <button class="active">Mi</button>
+          <button class="active">Do</button>
+          <button class="active">Fr</button>
+          <button>Sa</button>
+          <button>So</button>
+        </div>
+        <div class="time-range-container hidden" id="time-range-section">
+          <div class="time-track"></div>
+          <div class="time-fill" id="time-fill-bar"></div>
+          <input
+            type="range"
+            id="time-range-input"
+            min="0"
+            max="1439"
+            value="950"
+            step="1"
+          />
+          <div class="time-markers">
+            <span>00:00</span>
+            <span>23:59</span>
+          </div>
+        </div>
+      `;
+
+      const addBtn = document.querySelector(".btn.add");
+      const removeBtn = document.querySelector(".btn.remove");
+      const scheduleContent = document.getElementById("scheduleContent");
+      const scheduleCard = document.getElementById("scheduleCard");
+
+      // Function to attach event listeners for the "On" mode (SoC and Price Signal toggles)
+      function attachOnModeListeners() {
+        const toggleThreshold = document.getElementById("soc-toggle-thr");
+        const toggleStateThreshold =
+          toggleThreshold?.querySelector(".toggle-state");
+        const rangeGroup1 = document.getElementById("range-group-1");
+        const rangeGroup2 = document.getElementById("range-group-2");
+
+        if (
+          toggleThreshold &&
+          toggleStateThreshold &&
+          rangeGroup1 &&
+          rangeGroup2
+        ) {
+          toggleThreshold.addEventListener("click", () => {
+            const isActive = toggleThreshold.classList.toggle("active");
+            toggleStateThreshold.textContent = isActive ? "on" : "off";
+            rangeGroup1.classList.toggle("hidden", !isActive);
+            rangeGroup2.classList.toggle("hidden", !isActive);
+          });
+        }
+
+        const toggle = document.getElementById("soc-toggle");
+        const toggleState = toggle?.querySelector(".toggle-state");
+
+        if (toggle && toggleState) {
+          let isOn = false;
+          toggle.addEventListener("click", () => {
+            isOn = !isOn;
+            toggleState.textContent = isOn ? "on" : "off";
+            toggle.classList.toggle("active", isOn);
+          });
+        }
+
+        const priceToggle = document.getElementById("price-toggle");
+        if (priceToggle) {
+          priceToggle.addEventListener("click", () => {
+            const toggleState = priceToggle.querySelector(".toggle-state");
+            const isActive = priceToggle.classList.toggle("active");
+            toggleState.textContent = isActive ? "on" : "off";
+          });
+        }
+
+        const secondTherd = document.getElementById("threshold-toggle-2");
+        const rangeGroup = document.getElementById("threshold-range-group");
+
+        if (secondTherd && rangeGroup) {
+          secondTherd.addEventListener("click", () => {
+            const toggleState = secondTherd.querySelector(".toggle-state");
+            const isActive = secondTherd.classList.toggle("active");
+            toggleState.textContent = isActive ? "on" : "off";
+            rangeGroup.classList.toggle("hidden", !isActive);
+          });
+        }
+
+        document.addEventListener("input", (e) => {
+          if (e.target.id === "range1" || e.target.id === "range2") {
+            const r1 = document.getElementById("range1");
+            const r2 = document.getElementById("range2");
+            if (r1 && r2) {
+              document.getElementById(
+                "label1"
+              ).textContent = `${r1.value}-80 %`;
+              document.getElementById(
+                "label2"
+              ).textContent = `${r2.value}-80 %`;
+            }
+          }
+        });
+      }
+
+      // Function to attach event listeners for the "Off" mode (one time/repeat toggle and time range)
+      function attachOffModeListeners() {
+        const oneTimeBtn = document.getElementById("one-time-btn");
+        const repeatBtn = document.getElementById("repeat-btn");
+        const daysSection = document.getElementById("days-section");
+        const timeRangeSection = document.getElementById("time-range-section");
+
+        if (oneTimeBtn && repeatBtn && daysSection && timeRangeSection) {
+          oneTimeBtn.addEventListener("click", () => {
+            console.log("One Time button clicked");
+            scheduleContent.classList.remove("collapsed");
+            oneTimeBtn.classList.remove("toggle-off");
+            oneTimeBtn.classList.add("toggle-on");
+            repeatBtn.classList.remove("toggle-on");
+            repeatBtn.classList.add("toggle-off");
+
+            daysSection.classList.add("hidden");
+            timeRangeSection.classList.remove("hidden");
+            console.log(
+              "Time Range Section visibility:",
+              timeRangeSection.classList.contains("hidden")
+                ? "hidden"
+                : "visible"
+            );
+          });
+
+          repeatBtn.addEventListener("click", () => {
+            console.log("Repeat button clicked");
+            repeatBtn.classList.remove("toggle-off");
+            repeatBtn.classList.add("toggle-on");
+            oneTimeBtn.classList.remove("toggle-on");
+            oneTimeBtn.classList.add("toggle-off");
+
+            daysSection.classList.remove("hidden");
+            timeRangeSection.classList.add("hidden");
+            console.log(
+              "Days Section visibility:",
+              daysSection.classList.contains("hidden") ? "hidden" : "visible"
+            );
+          });
+        } else {
+          console.error("One or more elements not found:", {
+            oneTimeBtn: !!oneTimeBtn,
+            repeatBtn: !!repeatBtn,
+            daysSection: !!daysSection,
+            timeRangeSection: !!timeRangeSection,
+          });
+        }
+
+        const slider = document.getElementById("time-range-input");
+        const fill = document.getElementById("time-fill-bar");
+
+        if (slider && fill) {
+          slider.addEventListener("input", () => {
+            const value = slider.value;
+            const max = slider.max;
+            const percentage = (value / max) * 100;
+            fill.style.width = `${percentage}%`;
+          });
+
+          const initialValue = slider.value;
+          const max = slider.max;
+          const initialPercentage = (initialValue / max) * 100;
+          fill.style.width = `${initialPercentage}%`;
+        }
+      }
+
+      // Function to attach delete icon listener
+      function attachDeleteListener() {
+        const deleteIcon = document.getElementById("delete-icon");
+        if (deleteIcon) {
+          deleteIcon.addEventListener("click", () => {
+            console.log("Delete icon clicked");
+            const card = deleteIcon.closest(".card");
+            if (card) {
+              card.classList.add("hidden");
+              console.log("Card hidden");
+              scheduleContent.classList.add("collapsed");
+              document
+                .querySelector(".schedule")
+                .classList.remove("no-background");
+            } else {
+              console.error("Card element not found");
+            }
+          });
+        } else {
+          console.error("Delete icon not found");
+        }
+      }
+
+      // Add (On) button click handler
+      addBtn.addEventListener("click", () => {
+        console.log("Add (On) clicked");
+        scheduleContent.classList.remove("collapsed");
+        scheduleCard.classList.remove("hidden");
+        scheduleCard.innerHTML = onModeTemplate;
+        document.querySelector(".schedule").classList.add("no-background");
+        attachOnModeListeners();
+        attachDeleteListener();
+      });
+
+      // Add (Off) button click handler
+      removeBtn.addEventListener("click", () => {
+        console.log("Add (Off) clicked");
+        scheduleContent.classList.remove("collapsed");
+        scheduleCard.classList.remove("hidden");
+        scheduleCard.innerHTML = offModeTemplate;
+        document.querySelector(".schedule").classList.add("no-background");
+        attachOffModeListeners();
+        attachDeleteListener();
+      });
+
+      // Initialize listeners for the default state (off mode)
+      attachOffModeListeners();
+      attachDeleteListener();
+
+      // Handle input box focus events
+      document.querySelectorAll(".input-box").forEach((box) => {
+        const input = box.querySelector("input");
+        if (input) {
+          input.addEventListener("focus", () => {
+            box.classList.add("focused");
+          });
+          input.addEventListener("blur", () => {
+            box.classList.remove("focused");
+          });
+        }
+      });
+    </script>
   </body>
 </html>

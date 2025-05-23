@@ -172,6 +172,37 @@ canvas {
   padding: 0 6%;
   justify-content: space-between;
 }
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#subscription-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+
+#subscription-button {
+  transition: filter 0.2s;
+  cursor: pointer;
+}
 @media (max-width: 600px) {
   body {
     padding: 0;

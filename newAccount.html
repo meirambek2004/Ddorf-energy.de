@@ -15,7 +15,7 @@
     </div>
     <div class="new-account">
       <a href="index.html">
-        <img src="/newAcc-img/button.svg" alt="" />
+        <img src="/newAcc-img/button.svg" alt="" id="change-button" />
       </a>
       <p>New Account</p>
     </div>
@@ -36,10 +36,45 @@
         <input type="password" />
         <img src="/newAcc-img/input.svg" alt="" width="16px" height="16px" />
       </div>
-      <button>
-        <img src="/newAcc-img/ico.svg" alt="" />
-        Send verification code
-      </button>
+
+      <div class="button-container" id="buttonContainer">
+        <div class="verify-code-container" id="verifyCodeContainer">
+          <input type="text" placeholder="Enter code" id="verifyCodeInput" />
+        </div>
+        <button id="sendCodeBtn">
+          <img src="/newAcc-img/ico.svg" alt="" />
+          Send verification code
+        </button>
+      </div>
+
+      <div class="update-message" id="updateMessage">Information updated</div>
     </div>
+
+    <script>
+      const sendCodeBtn = document.getElementById("sendCodeBtn");
+      const verifyCodeContainer = document.getElementById(
+        "verifyCodeContainer"
+      );
+      const buttonContainer = document.getElementById("buttonContainer");
+      const updateMessage = document.getElementById("updateMessage");
+
+      let isCodeSent = false; // Флаг для отслеживания состояния
+
+      sendCodeBtn.addEventListener("click", () => {
+        if (!isCodeSent) {
+          // Первое нажатие: отправка кода
+          verifyCodeContainer.style.display = "block";
+          sendCodeBtn.innerHTML = "Confirm changes";
+          sendCodeBtn.classList.add("smaller");
+          buttonContainer.classList.add("active");
+          isCodeSent = true;
+        } else {
+          // Второе нажатие: подтверждение кода
+          updateMessage.style.display = "block";
+          sendCodeBtn.style.display = "none"; // Скрываем кнопку после подтверждения
+          verifyCodeContainer.style.display = "none"; // Скрываем поле для ввода кода
+        }
+      });
+    </script>
   </body>
 </html>

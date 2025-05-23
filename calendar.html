@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendário e Relógio</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #f0f0f0;
+      }
+
+      .calendar-container {
+        width: 320px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background: white;
+      }
+
+      .calendar-header {
+        display: flex;
+        background: #007bff;
+        color: white;
+      }
+
+      .calendar-tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px 0;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .calendar-tab.inactive {
+        background: #e9f0ff;
+        color: #007bff;
+      }
+
+      .calendar-info {
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .calendar-info small {
+        font-size: 12px;
+        opacity: 0.7;
+      }
+
+      .calendar-info strong {
+        font-size: 16px;
+        display: block;
+      }
+
+      .calendar-controls {
+        background: #f2f6ff;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .calendar-controls button {
+        background: transparent;
+        border: none;
+        font-size: 18px;
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      .calendar-controls span {
+        font-weight: bold;
+        font-size: 16px;
+        color: #007bff;
+      }
+
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .calendar-grid .day-name {
+        color: #9cb0d0;
+        font-weight: bold;
+      }
+
+      .calendar-grid .day {
+        padding: 8px 0;
+      }
+
+      .calendar-grid .day.today {
+        color: red;
+        font-weight: bold;
+        border-bottom: 1px solid red;
+      }
+
+      .calendar-grid .day.inactive {
+        color: #b8c7d9;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      #time-picker {
+        height: 250px;
+        position: relative;
+      }
+
+      .clock-hour {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: #007bff;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .clock-center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+        font-weight: bold;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <div class="calendar-tab" onclick="switchTab('date')">Date</div>
+        <div class="calendar-tab inactive" onclick="switchTab('time')">
+          Time
+        </div>
+      </div>
+      <div class="calendar-info">
+        <small>2024</small>
+        <strong id="selected-date">Seg, julho 15</strong>
+      </div>
+
+      <div class="tab-content active" id="date-tab">
+        <div class="calendar-controls">
+          <button onclick="prevMonth()">❮</button>
+          <span id="month-year">Julho 2024</span>
+          <button onclick="nextMonth()">❯</button>
+        </div>
+        <div class="calendar-grid" id="calendar-days"></div>
+      </div>
+
+      <div class="tab-content" id="time-tab">
+        <div id="time-picker"></div>
+      </div>
+    </div>
+
+    <script>
+      const calendarTabs = document.querySelectorAll(".calendar-tab");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const selectedDateEl = document.getElementById("selected-date");
+      const timePicker = document.getElementById("time-picker");
+      const monthYear = document.getElementById("month-year");
+      const daysContainer = document.getElementById("calendar-days");
+
+      const monthNames = [
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+      ];
+
+      const dayNames = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"];
+
+      let currentDate = new Date(2024, 6, 15); // Julho
+      let selectedHour = 0;
+      let selectedMinute = 0;
+
+      function switchTab(tab) {
+        calendarTabs.forEach((tabEl) => tabEl.classList.add("inactive"));
+        tabContents.forEach((content) => content.classList.remove("active"));
+
+        if (tab === "date") {
+          calendarTabs[0].classList.remove("inactive");
+          tabContents[0].classList.add("active");
+        } else {
+          calendarTabs[1].classList.remove("inactive");
+          tabContents[1].classList.add("active");
+          renderClock(); // При переключении на Time — показать часы
+        }
+      }
+
+      function renderCalendar(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startDay = (firstDay.getDay() + 6) % 7;
+
+        daysContainer.innerHTML = "";
+        dayNames.forEach((day) => {
+          const el = document.createElement("div");
+          el.textContent = day;
+          el.classList.add("day-name");
+          daysContainer.appendChild(el);
+        });
+
+        const totalCells = startDay + lastDay.getDate();
+        const prevMonthLastDay = new Date(year, month, 0).getDate();
+
+        for (let i = 0; i < totalCells; i++) {
+          const dayEl = document.createElement("div");
+          dayEl.classList.add("day");
+
+          if (i < startDay) {
+            dayEl.textContent = prevMonthLastDay - (startDay - 1 - i);
+            dayEl.classList.add("inactive");
+          } else {
+            const dayNum = i - startDay + 1;
+            dayEl.textContent = dayNum;
+
+            if (
+              dayNum === currentDate.getDate() &&
+              month === currentDate.getMonth() &&
+              year === currentDate.getFullYear()
+            ) {
+              dayEl.classList.add("today");
+            }
+          }
+          daysContainer.appendChild(dayEl);
+        }
+
+        monthYear.textContent = `${monthNames[month]} ${year}`;
+        selectedDateEl.textContent = `Seg, ${monthNames[
+          month
+        ].toLowerCase()} ${currentDate.getDate()}`;
+      }
+
+      function prevMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar(currentDate);
+      }
+
+      function nextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar(currentDate);
+      }
+
+      function updateClockDisplay() {
+        const display = document.createElement("div");
+        display.className = "clock-center";
+        display.textContent = `${selectedHour
+          .toString()
+          .padStart(2, "0")}:${selectedMinute.toString().padStart(2, "0")}`;
+        return display;
+      }
+
+      function renderClock() {
+        timePicker.innerHTML = "";
+        const display = updateClockDisplay();
+        timePicker.appendChild(display);
+
+        const centerX = 160;
+        const centerY = 130;
+        const radius = 100;
+
+        for (let i = 0; i < 24; i++) {
+          const angle = (i * 15 - 90) * (Math.PI / 180);
+          const x = centerX + radius * Math.cos(angle) - 15;
+          const y = centerY + radius * Math.sin(angle) - 15;
+
+          const hourEl = document.createElement("div");
+          hourEl.className = "clock-hour";
+          hourEl.style.left = `${x}px`;
+          hourEl.style.top = `${y}px`;
+          hourEl.textContent = i.toString().padStart(2, "0");
+          hourEl.addEventListener("click", () => {
+            selectedHour = i;
+            renderMinutes();
+          });
+
+          timePicker.appendChild(hourEl);
+        }
+      }
+
+      function renderMinutes() {
+        timePicker.innerHTML = "";
+        const display = updateClockDisplay();
+        timePicker.appendChild(display);
+
+        const centerX = 160;
+        const centerY = 130;
+        const radius = 100;
+
+        for (let i = 0; i < 12; i++) {
+          const minute = i * 5;
+          const angle = (i * 30 - 90) * (Math.PI / 180);
+          const x = centerX + radius * Math.cos(angle) - 15;
+          const y = centerY + radius * Math.sin(angle) - 15;
+
+          const minEl = document.createElement("div");
+          minEl.className = "clock-hour";
+          minEl.style.left = `${x}px`;
+          minEl.style.top = `${y}px`;
+          minEl.textContent = minute.toString().padStart(2, "0");
+          minEl.addEventListener("click", () => {
+            selectedMinute = minute;
+            renderClock(); // Вернуться на часы (или оставить выбранное время)
+          });
+
+          timePicker.appendChild(minEl);
+        }
+      }
+
+      renderCalendar(currentDate);
+    </script>
+  </body>
+</html>

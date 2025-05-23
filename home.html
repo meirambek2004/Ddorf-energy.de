@@ -40,8 +40,14 @@
       <div class="device inverter">
         <img src="/home-img/inverter.svg" alt="Inverter" />
         <div class="inter-power" id="inverterPower">
-          521 W
-          <div class="on-of">on <span class="toogle"></span></div>
+          <span class="power-value">521 W</span>
+          <div class="toggle" id="soc-toggle">
+            <span class="toggle-state">off</span>
+            <div class="slider">
+              <div class="thumb"></div>
+            </div>
+            <span class="toggle-opposite"></span>
+          </div>
         </div>
       </div>
       <div class="device solar">
@@ -99,55 +105,110 @@
     </div>
 
     <script>
-      const data = {
-        homePower: "395 W",
-        gridPrice: "25,46 ct",
-        inverterPower: "521 W",
-        inverterStatus: true,
-        solarPower: "1604 W",
-        acPower: "395 W",
-        batteryPower: "1604 W",
-        evPower: "1604 W",
-        evBattery: 58,
-      };
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize toggle state
+        const toggle = document.getElementById("soc-toggle");
+        const toggleState = toggle.querySelector(".toggle-state");
+        const powerValue = document.querySelector(
+          "#inverterPower .power-value"
+        );
 
-      function updateDashboard(data) {
-        document.getElementById("homePower").textContent = data.homePower;
-        document.getElementById("gridPrice").textContent = data.gridPrice;
+        // Load toggle state from localStorage
+        let isOn =
+          JSON.parse(localStorage.getItem("inverterToggleState")) || false;
+        toggleState.textContent = isOn ? "on" : "off";
+        toggle.classList.toggle("active", isOn);
+        powerValue.style.display = isOn ? "inline" : "none";
 
-        const inverter = document.getElementById("inverterPower");
-        inverter.innerHTML = `
-          ${data.inverterPower}
-          <div class="on-of">
-            ${data.inverterStatus ? "on" : "off"} <span class="toogle"></span>
-          </div>
-        `;
+        // Toggle event listener
+        toggle.addEventListener("click", () => {
+          isOn = !isOn;
+          toggleState.textContent = isOn ? "on" : "off";
+          toggle.classList.toggle("active", isOn);
+          powerValue.style.display = isOn ? "inline" : "none";
+          localStorage.setItem("inverterToggleState", JSON.stringify(isOn));
+          console.log("Inverter toggle state:", isOn);
+        });
 
-        document.getElementById("solarPower").textContent = data.solarPower;
-        document.getElementById("acPower").textContent = data.acPower;
-        document.getElementById("batteryPower").textContent = data.batteryPower;
-        document.getElementById("evPower").textContent = data.evPower;
+        // Update battery and smart meter settings
+        function updateSettings() {
+          const batterySettings = JSON.parse(
+            localStorage.getItem("batterySettings")
+          );
+          console.log("Loaded batterySettings:", batterySettings);
 
-        document.getElementById("evBattery").innerHTML = `
-          <img src="/home-img/charg.svg" alt="" class="charg" />${data.evBattery}%
-        `;
-      }
+          if (batterySettings) {
+            const evPowerElement = document.getElementById("evPower");
+            if (evPowerElement && batterySettings.chargingPower) {
+              evPowerElement.textContent = `${batterySettings.chargingPower} W`;
+            } else if (evPowerElement) {
+              evPowerElement.textContent = "0 W";
+            }
 
-      updateDashboard(data);
+            const evBatteryElement = document.getElementById("evBattery");
+            if (evBatteryElement && batterySettings.minCharge) {
+              evBatteryElement.innerHTML = `<img src="/home-img/charg.svg" alt="" class="charg" />${batterySettings.minCharge}%`;
+            } else if (evBatteryElement) {
+              evBatteryElement.innerHTML = `<img src="/home-img/charg.svg" alt="" class="charg" />0%`;
+            }
+          } else {
+            console.log("No batterySettings found in localStorage");
+            const evPowerElement = document.getElementById("evPower");
+            if (evPowerElement) evPowerElement.textContent = "0 W";
+            const evBatteryElement = document.getElementById("evBattery");
+            if (evBatteryElement) {
+              evBatteryElement.innerHTML = `<img src="/home-img/charg.svg" alt="" class="charg" />0%`;
+            }
+          }
 
-      // Пример обновления данных (можно заменить на fetch API)
-      setInterval(() => {
-        // Эмуляция обновления данных
-        data.evBattery = data.evBattery >= 100 ? 0 : data.evBattery + 1;
-        data.inverterStatus = !data.inverterStatus;
-        updateDashboard(data);
-      }, 5000);
+          const smartMeterSettings = JSON.parse(
+            localStorage.getItem("smartMeterSettings")
+          );
+          console.log("Loaded smartMeterSettings:", smartMeterSettings);
 
-      // Подсветка активной ссылки
-      document.querySelectorAll(".widjet-link a").forEach((link) => {
-        if (link.getAttribute("href") === window.location.pathname) {
-          link.parentElement.classList.add("active");
+          if (smartMeterSettings) {
+            const solarPowerElement = document.getElementById("solarPower");
+            if (solarPowerElement && smartMeterSettings.production) {
+              solarPowerElement.textContent = `${smartMeterSettings.production} W`;
+            } else if (solarPowerElement) {
+              solarPowerElement.textContent = "0 W";
+            }
+          } else {
+            console.log("No smartMeterSettings found in localStorage");
+            const solarPowerElement = document.getElementById("solarPower");
+            if (solarPowerElement) solarPowerElement.textContent = "0 W";
+          }
         }
+
+        updateSettings();
+
+        window.addEventListener("storage", (event) => {
+          if (
+            event.key === "batterySettings" ||
+            event.key === "smartMeterSettings"
+          ) {
+            console.log(
+              `Storage event triggered for ${event.key}:`,
+              event.newValue
+            );
+            updateSettings();
+          } else if (event.key === "inverterToggleState") {
+            isOn = JSON.parse(event.newValue);
+            toggleState.textContent = isOn ? "on" : "off";
+            toggle.classList.toggle("active", isOn);
+            powerValue.style.display = isOn ? "inline" : "none";
+            console.log("Inverter toggle state updated via storage:", isOn);
+          }
+        });
+
+        const currentPath =
+          window.location.pathname.split("/").pop() || "home.html";
+        document.querySelectorAll(".nav-dash a").forEach((link) => {
+          const href = link.getAttribute("href") || "home.html";
+          if (href === currentPath) {
+            link.parentElement.classList.add("active");
+          }
+        });
       });
     </script>
   </body>

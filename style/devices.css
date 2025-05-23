@@ -82,6 +82,7 @@ body {
   border-radius: 15px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
 .title-row {
@@ -207,6 +208,374 @@ p {
   align-items: center;
   font-size: 0.9rem;
 }
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 300px;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.popup p {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup input {
+  width: 80px;
+  padding: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.delete-btn {
+  margin-top: 0.5rem;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: right;
+}
+.production-input {
+  border: 2px solid gray;
+}
+
+.hidden {
+  display: none;
+}
+
+.input-field {
+  width: 100%;
+  padding: 4px;
+  margin-top: 4px;
+}
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.settings-view .setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.settings-view label {
+  font-weight: 500;
+  margin-right: 12px;
+  min-width: 150px;
+}
+
+.input-field {
+  padding: 4px 6px;
+  width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@keyframes slideOutLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.page-transition-out {
+  animation: slideOutLeft 0.5s ease forwards;
+}
+.settings-view {
+  padding: 10px 0;
+}
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+.setting-row label {
+  flex: 1;
+  color: #333;
+}
+.setting-row .input-field {
+  width: 70px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
+
+.setting-row .small-btn:hover {
+  background-color: #f0f0f0;
+}
+.setting-row .toggle-wrap {
+  display: flex;
+  align-items: center;
+}
+.setting-row .toggle-wrap input[type="checkbox"] {
+  display: none;
+}
+.setting-row .toggle-wrap .toggle-circle {
+  height: 20px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  overflow: hidden;
+}
+
+.setting-row .toggle-wrap .toggle-circle::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+}
+
+.setting-row .toggle-wrap input[type="checkbox"]:checked + .toggle-circle {
+  background-color: #4a90e2;
+}
+
+.setting-row
+  .toggle-wrap
+  input[type="checkbox"]:checked
+  + .toggle-circle::before {
+  transform: translateX(16px); /* 36 - 16 - 2*2 = 16 */
+}
+
+.setting-row .toggle-wrap span {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #666;
+  min-width: 30px; /* Чтобы текст не прыгал */
+}
+.settings-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.delete-device-btn,
+.delete-smartmeter-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  background: none;
+  color: gray;
+  transition: color 0.3s;
+}
+
+.delete-device-btn img,
+.delete-smartmeter-btn img,
+.settings-btn img .settings-icon {
+  filter: brightness(0) saturate(100%) invert(50%) sepia(0%) saturate(0%)
+    hue-rotate(180deg);
+  transition: filter 0.3s;
+}
+
+.delete-device-btn:hover,
+.delete-smartmeter-btn:hover,
+.settings-btn:hover {
+  color: black;
+}
+
+.delete-device-btn:hover img,
+.delete-smartmeter-btn:hover img,
+.settings-btn:hover img,
+.settings-icon:hover {
+  /* Синий фильтр, близкий к #007aff */
+  filter: brightness(0) saturate(100%) invert(42%) sepia(97%) saturate(1914%)
+    hue-rotate(195deg) brightness(102%) contrast(101%);
+}
+.editable-title {
+  transition: color 0.3s, text-decoration 0.3s;
+  cursor: pointer;
+}
+
+.editable-title:hover {
+  color: black;
+}
+.settings-header {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.settings-header img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.power-limit-container {
+  max-width: 0;
+  overflow: hidden;
+  transition: max-width 0.3s ease, opacity 0.3s ease;
+  margin-left: 10px;
+  display: flex;
+}
+
+.power-limit-container.show {
+  max-width: 80px;
+}
+
+.power-limit-input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.power-limit-container.show .power-limit-input {
+  opacity: 1;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  position: relative;
+}
+
+.slider {
+  width: 50px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  position: relative;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.thumb {
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  transition: left 0.3s;
+}
+
+.toggle-input {
+  display: none;
+  width: 60px;
+  padding: 4px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.toggle.active .slider {
+  background: #00c853;
+}
+
+.toggle.active .thumb {
+  left: 27px;
+}
+
+.toggle .toggle-state {
+  display: inline-block;
+}
+
+.toggle.active .toggle-state {
+  display: none;
+}
+
+.toggle.active .toggle-input {
+  display: inline-block;
+}
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#subscription-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+
+#subscription-button {
+  transition: filter 0.2s;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .top-bar {
     margin: 10px;

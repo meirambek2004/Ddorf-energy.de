@@ -107,10 +107,73 @@ body {
   font-size: 22px;
 }
 .new-account a {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .ddorf {
   color: black;
+}
+.verify-code-container {
+  display: none; /* скрыт изначально */
+}
+.verify-code-container input {
+  width: 100px; /* Уменьшенный размер для инпута с кодом */
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-right: 10px; /* Отступ справа от инпута */
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.button-container.active {
+  justify-content: center;
+  gap: 10px;
+}
+.register-container button.smaller {
+  width: 150px; /* Новый размер кнопки после нажатия */
+  height: 50px;
+}
+.register-container input:focus {
+  border-color: #1e90ff;
+  outline: none;
+}
+
+/* Для иконок — меняем фильтр при фокусе инпута */
+.info input:focus + img {
+  filter: invert(32%) sepia(97%) saturate(2861%) hue-rotate(197deg)
+    brightness(93%) contrast(91%);
+  transition: filter 0.3s ease;
+}
+
+/* Изначально серый или без фильтра */
+.info img {
+  filter: none;
+  transition: filter 0.3s ease;
+}
+
+/* Стили для сообщения об обновлении */
+.update-message {
+  display: none; /* Скрыто изначально */
+  margin-top: 20px;
+  color: #1e90ff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+#change-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+#change-button {
+  transition: filter 0.2s;
+  cursor: pointer;
 }

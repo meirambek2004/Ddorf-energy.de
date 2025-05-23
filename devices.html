@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Devices Dashboard</title>
     <link rel="stylesheet" href="/style/devices.css" />
+    <style></style>
   </head>
   <body>
     <header class="top-bar">
@@ -34,7 +35,7 @@
       <section class="devices">
         <h2>Devices</h2>
         <div class="devices-grid">
-          <div class="device-card">
+          <div class="device-card" data-device="smart-meter">
             <div class="title-row">
               <span>Smart meter</span>
               <span class="status running">running</span>
@@ -61,10 +62,19 @@
               </span>
             </p>
             <div class="status-row">
-              <button class="settings-btn">⚙ Settings</button>
+              <button class="settings-btn">
+                <img src="/ico-img/settings.svg" alt="" /> Settings
+              </button>
+            </div>
+            <div class="settings-view hidden">
+              <button class="delete-smartmeter-btn">
+                <img src="/ico-img/delete.svg" alt="Delete Icon" />
+                Delete devices
+              </button>
             </div>
           </div>
-          <div class="device-card">
+
+          <div class="device-card battery-card" data-device="battery">
             <div class="title-row">
               <span>Battery, SMA</span>
               <div>
@@ -74,7 +84,62 @@
             </div>
             <p>Charging <span class="status-row">1604 W</span></p>
             <div class="status-row">
-              <button class="settings-btn">⚙ Settings</button>
+              <button class="settings-btn">
+                <img src="/ico-img/settings.svg" alt="" /> Settings
+              </button>
+            </div>
+
+            <div class="settings-view hidden">
+              <div class="setting-row">
+                <label for="min-charge">Min. charge level</label>
+                <input
+                  id="min-charge"
+                  type="number"
+                  class="input-field"
+                  value="80"
+                  min="0"
+                  max="100"
+                />
+              </div>
+              <div class="setting-row">
+                <label for="max-charge">Max. charge level</label>
+                <input
+                  id="max-charge"
+                  type="number"
+                  class="input-field"
+                  value="100"
+                  min="0"
+                  max="100"
+                />
+              </div>
+              <div class="setting-row">
+                <label for="power-limit-toggle">Charging power limit</label>
+                <div class="toggle" id="soc-toggle-thr">
+                  <div class="slider">
+                    <div class="thumb"></div>
+                  </div>
+                  <span class="toggle-state">off</span>
+                  <input
+                    type="number"
+                    class="toggle-input"
+                    placeholder="Value"
+                  />
+                  <span class="toggle-opposite"></span>
+                </div>
+
+                <div class="power-limit-container">
+                  <input
+                    type="number"
+                    class="power-limit-input"
+                    placeholder="Введите значение"
+                  />
+                </div>
+              </div>
+              <button class="delete-device-btn">
+                <img src="/ico-img/delete.svg" alt="Delete Icon" />
+                Delete device
+              </button>
+              <div style="visibility: hidden">db</div>
             </div>
           </div>
         </div>
@@ -84,53 +149,50 @@
         <div class="section-header">
           <h3>Other Devices</h3>
           <div class="action-buttons">
-            <button class="priority">📊 Prioryty</button>
+            <button class="priority">📊 Priority</button>
             <button class="add">➕ Add Device</button>
           </div>
         </div>
         <div class="other-grid">
           <div class="device-card">
             <p>Wallbox <span class="status-row">2000 W</span></p>
-
             <div class="modes">
-              <button class="off">Off</button>
-              <button class="on">On</button>
-              <button class="surplus">Surplus</button>
-              <button class="smart">Smart</button>
+              <button class="off small-btn">Off</button>
+              <button class="on small-btn">On</button>
+              <button class="surplus small-btn">Surplus</button>
+              <button class="smart small-btn">Smart</button>
             </div>
             <div class="status-row">
-              <button class="settings-btn" id="wallbox-settings">
-                ⚙ Settings
+              <button class="settings-btn" id="wallbox-button">
+                <img src="/ico-img/settings.svg" alt="" /> Settings
               </button>
             </div>
           </div>
           <div class="device-card">
             <p>Heat Pump <span class="status-row">300 W</span></p>
-
             <div class="modes">
-              <button class="off">Off</button>
-              <button class="schedule">Schedule</button>
-              <button class="on">On</button>
-              <button class="smart">Smart</button>
+              <button class="off small-btn">Off</button>
+              <button class="schedule small-btn">Schedule</button>
+              <button class="on small-btn">On</button>
+              <button class="smart small-btn">Smart</button>
             </div>
             <div class="status-row">
-              <button class="settings-btn" id="heatpump-settings">
-                ⚙ Settings
+              <button class="settings-btn" id="heatpump-button">
+                <img src="/ico-img/settings.svg" alt="" /> Settings
               </button>
             </div>
           </div>
           <div class="device-card">
             <p>Switch 1 <span class="status-row">200 W</span></p>
-
             <div class="modes">
-              <button class="off">Off</button>
-              <button class="schedule">Schedule</button>
-              <button class="on">On</button>
-              <button class="smart">Smart</button>
+              <button class="off small-btn">Off</button>
+              <button class="schedule small-btn">Schedule</button>
+              <button class="on small-btn">On</button>
+              <button class="smart small-btn">Smart</button>
             </div>
             <div class="status-row">
-              <button class="settings-btn" id="switch1-settings">
-                ⚙ Settings
+              <button class="settings-btn" id="switch-button">
+                <img src="/ico-img/settings.svg" alt="" /> Settings
               </button>
             </div>
           </div>
@@ -140,44 +202,312 @@
     <div class="border-line"></div>
     <footer class="bottom-nav">
       <div class="bottom-bar">
-        <a href="#" data-page="dashboard"
-          ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
-        >
-        <a href="devices.html" data-page="devices"
-          ><img src="/home-img/devices.svg" alt="" /><span>Devices</span></a
-        >
-        <a href="account.html" data-page="subsTrial"
-          ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
-        >
+        <a href="#" data-page="dashboard">
+          <img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span>
+        </a>
+        <a href="devices.html" data-page="devices">
+          <img src="/home-img/devices.svg" alt="" /><span>Devices</span>
+        </a>
+        <a href="account.html" data-page="subsTrial">
+          <img src="/home-img/settings.svg" alt="" /><span>Settings</span>
+        </a>
       </div>
     </footer>
-  </body>
-  <script>
-    const currentPath = window.location.pathname.split("/").pop();
 
-    document.querySelectorAll(".bottom-bar a").forEach((link) => {
-      const linkPath = link.getAttribute("href");
-      if (linkPath === currentPath) {
-        link.classList.add("active");
-      }
-    });
-    const wallboxSettingsBtn = document.getElementById("wallbox-settings");
-    if (wallboxSettingsBtn) {
-      wallboxSettingsBtn.addEventListener("click", () => {
-        window.location.href = "wallbox.html";
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const deviceDefaults = {
+          "smart-meter": {
+            title: "Smart meter",
+            editTitle: "Smart meter settings",
+            restoreContent: (card) => {
+              const p = card.querySelectorAll("p");
+              if (p.length >= 3) {
+                const input = card.querySelector(".production-input");
+                const productionValue = input?.value?.trim() || "1604";
+                p[0].innerHTML = `Production: <span class="status-row"><strong>${productionValue} W</strong></span>`;
+                p[1].innerHTML = `Consumption: <span class="status-row"><strong>1604 W</strong></span>`;
+                p[2].innerHTML = `Feed-in: <span class="status-row"><strong>2 W</strong></span>`;
+                // Save to localStorage
+                localStorage.setItem(
+                  "smartMeterSettings",
+                  JSON.stringify({
+                    production: productionValue,
+                    consumption: "1604",
+                    feedin: "2",
+                  })
+                );
+                console.log("Saved smartMeterSettings:", {
+                  production: productionValue,
+                });
+              }
+              const settingsView = card.querySelector(".settings-view");
+              settingsView?.classList.add("hidden");
+            },
+          },
+          battery: {
+            title: "Battery, SMA",
+            editTitle: "Battery Settings",
+          },
+        };
+
+        document.querySelectorAll(".device-card").forEach((card) => {
+          const type = card.dataset.device;
+          if (!deviceDefaults[type]) return;
+
+          const settingsBtn = card.querySelector(".settings-btn");
+          const titleEl =
+            card.querySelector(".title-row span:first-child") ||
+            card.querySelector(".title-row");
+          const runningStatus = card.querySelector(".status.running");
+
+          let isEditing = false;
+
+          settingsBtn?.addEventListener("click", () => {
+            isEditing = !isEditing;
+            const config = deviceDefaults[type];
+
+            if (isEditing) {
+              card.classList.add("editing");
+              if (titleEl) {
+                titleEl.innerHTML = `
+                  <div class="settings-cinons">
+                    <img src="/ico-img/arrow-left.svg" alt="Settings Icon"
+                      style="width:16px; height:16px; vertical-align:middle; margin-right:6px; cursor:pointer;"
+                      class="settings-icon"
+                    > <span class="editable-title">${config.editTitle}</span></div>`;
+              }
+              if (runningStatus) runningStatus.style.display = "none";
+
+              const pBlocks = card.querySelectorAll("p");
+              if (type === "smart-meter" && pBlocks.length >= 3) {
+                pBlocks[0].innerHTML = `Manufacturer: <span class="status-row"><strong>SMA</strong></span>`;
+                pBlocks[1].innerHTML = `Last: <span class="status-row"><strong>1 min</strong></span>`;
+                pBlocks[2].innerHTML = `Production:
+                  <span class="status-row">
+                    <strong><input type="text" value="1604" class="production-input" style="width: 60px; padding: 4px"></strong>
+                  </span>`;
+                const settingsView = card.querySelector(".settings-view");
+                settingsView?.classList.remove("hidden");
+
+                // Add input event listener for production-input
+                const productionInput = card.querySelector(".production-input");
+                productionInput?.addEventListener("input", () => {
+                  const productionValue = productionInput.value.trim() || "0";
+                  localStorage.setItem(
+                    "smartMeterSettings",
+                    JSON.stringify({
+                      production: productionValue,
+                      consumption: "1604",
+                      feedin: "2",
+                    })
+                  );
+                  console.log("Updated smartMeterSettings:", {
+                    production: productionValue,
+                  });
+                });
+              }
+
+              if (type === "battery") {
+                card.querySelector(".battery-status")?.classList.add("hidden");
+                card.querySelector("p")?.classList.add("hidden");
+                card
+                  .querySelector(".settings-view")
+                  ?.classList.remove("hidden");
+                loadBatterySettings(card);
+              }
+
+              settingsBtn.style.display = "none";
+
+              const icon = card.querySelector(".settings-icon");
+              icon?.addEventListener("click", () => {
+                restoreCard(card, config);
+              });
+
+              const deleteBtn =
+                card.querySelector(".delete-device-btn") ||
+                card.querySelector(".delete-smartmeter-btn");
+              deleteBtn?.addEventListener("click", () => {
+                restoreCard(card, config);
+              });
+            } else {
+              restoreCard(card, config);
+            }
+          });
+
+          function restoreCard(card, config) {
+            isEditing = false;
+            card.classList.remove("editing");
+
+            if (titleEl) titleEl.textContent = config.title;
+            if (runningStatus) runningStatus.style.display = "inline";
+
+            config.restoreContent?.(card);
+
+            if (type === "battery") {
+              const batteryStatus = card.querySelector(".battery-status");
+              const chargingText = card.querySelector("p");
+              const settingsView = card.querySelector(".settings-view");
+
+              const toggleInput = card.querySelector(".toggle-input");
+              const powerLimitInput = card.querySelector(".power-limit-input");
+              const toggleThreshold = card.querySelector("#soc-toggle-thr");
+              const isToggleActive =
+                toggleThreshold.classList.contains("active");
+
+              const chargingPower = toggleInput?.value?.trim() || "0";
+              const powerLimit = powerLimitInput?.value?.trim() || "0";
+
+              localStorage.setItem(
+                "batterySettings",
+                JSON.stringify({
+                  minCharge: card.querySelector("#min-charge")?.value || "80",
+                  maxCharge: card.querySelector("#max-charge")?.value || "100",
+                  socToggle: isToggleActive,
+                  chargingPower,
+                  powerLimit,
+                })
+              );
+
+              batteryStatus?.classList.remove("hidden");
+              const savedSettings = JSON.parse(
+                localStorage.getItem("batterySettings")
+              );
+              if (batteryStatus && savedSettings?.minCharge) {
+                batteryStatus.textContent = `🔋 ${savedSettings.minCharge}%`;
+              }
+              if (chargingText) {
+                chargingText.innerHTML = `Charging <span class="status-row">${chargingPower} W</span>`;
+                chargingText.classList.remove("hidden");
+              }
+              settingsView?.classList.add("hidden");
+            }
+
+            if (type === "smart-meter") {
+              const settingsView = card.querySelector(".settings-view");
+              settingsView?.classList.add("hidden");
+            }
+
+            settingsBtn.style.display = "block";
+            settingsBtn.textContent = "⚙ Settings";
+          }
+
+          if (type === "battery") {
+            const batteryCard = card;
+            const minChargeInput = batteryCard.querySelector("#min-charge");
+            const maxChargeInput = batteryCard.querySelector("#max-charge");
+            const toggleThreshold =
+              batteryCard.querySelector("#soc-toggle-thr");
+            const toggleInput = batteryCard.querySelector(".toggle-input");
+            const powerLimitInput =
+              batteryCard.querySelector(".power-limit-input");
+            const toggleState = toggleThreshold.querySelector(".toggle-state");
+            const batteryStatus = batteryCard.querySelector(".battery-status");
+
+            function saveBatterySettings() {
+              const powerLimitValue = powerLimitInput.value.trim();
+              const minChargeValue = minChargeInput.value || "80";
+              const data = {
+                minCharge: minChargeValue,
+                maxCharge: maxChargeInput.value || "100",
+                socToggle: toggleThreshold.classList.contains("active"),
+                chargingPower: toggleInput.value.trim() || "0",
+                powerLimit: powerLimitValue ? parseInt(powerLimitValue, 10) : 0,
+              };
+              console.log("Saving batterySettings:", data);
+              localStorage.setItem("batterySettings", JSON.stringify(data));
+
+              if (batteryStatus) {
+                batteryStatus.textContent = `🔋 ${minChargeValue}%`;
+              }
+
+              if (!batteryCard.classList.contains("editing")) {
+                const chargingText = batteryCard.querySelector("p");
+                if (chargingText) {
+                  chargingText.innerHTML = `Charging <span class="status-row">${data.chargingPower} W</span>`;
+                }
+              }
+            }
+
+            function loadBatterySettings(card) {
+              const saved = localStorage.getItem("batterySettings");
+              if (saved) {
+                const data = JSON.parse(saved);
+                console.log("Loading batterySettings:", data);
+                if (minChargeInput)
+                  minChargeInput.value = data.minCharge ?? "80";
+                if (maxChargeInput)
+                  maxChargeInput.value = data.maxCharge ?? "100";
+                if (data.socToggle) {
+                  toggleThreshold.classList.add("active");
+                  toggleState.textContent = "on";
+                } else {
+                  toggleThreshold.classList.remove("active");
+                  toggleState.textContent = "off";
+                }
+                if (toggleInput) toggleInput.value = data.chargingPower ?? "";
+                if (powerLimitInput)
+                  powerLimitInput.value = data.powerLimit ?? "";
+                if (batteryStatus && data.minCharge) {
+                  batteryStatus.textContent = `🔋 ${data.minCharge}%`;
+                }
+              }
+            }
+
+            minChargeInput?.addEventListener("input", saveBatterySettings);
+            maxChargeInput?.addEventListener("input", saveBatterySettings);
+            toggleInput?.addEventListener("input", saveBatterySettings);
+            powerLimitInput?.addEventListener("input", saveBatterySettings);
+
+            toggleThreshold?.addEventListener("click", (e) => {
+              if (e.target === toggleInput) return;
+              const isActive = toggleThreshold.classList.toggle("active");
+              toggleState.textContent = isActive ? "on" : "off";
+              saveBatterySettings();
+              if (isActive) {
+                toggleInput.focus();
+              }
+            });
+
+            loadBatterySettings(batteryCard);
+          }
+        });
+
+        const currentPath = window.location.pathname.split("/").pop();
+        document.querySelectorAll(".bottom-bar a").forEach((link) => {
+          if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+          }
+        });
+
+        const wallboxButton = document.getElementById("wallbox-button");
+        const page = document.body;
+        wallboxButton?.addEventListener("click", function (e) {
+          e.preventDefault();
+          page.classList.add("page-transition-out");
+          setTimeout(() => {
+            window.location.href = "wallbox.html";
+          }, 400);
+        });
+
+        const heatpumpButton = document.getElementById("heatpump-button");
+        heatpumpButton?.addEventListener("click", function (e) {
+          e.preventDefault();
+          page.classList.add("page-transition-out");
+          setTimeout(() => {
+            window.location.href = "heatPump.html";
+          }, 400);
+        });
+
+        const switchButton = document.getElementById("switch-button");
+        switchButton?.addEventListener("click", function (e) {
+          e.preventDefault();
+          page.classList.add("page-transition-out");
+          setTimeout(() => {
+            window.location.href = "switch.html";
+          }, 400);
+        });
       });
-    }
-    const heatPumpSettingsBtn = document.getElementById("heatpump-settings");
-    if (heatPumpSettingsBtn) {
-      heatPumpSettingsBtn.addEventListener("click", () => {
-        window.location.href = "heatPump.html";
-      });
-    }
-    const switch1SettingsBtn = document.getElementById("switch1-settings");
-    if (switch1SettingsBtn) {
-      switch1SettingsBtn.addEventListener("click", () => {
-        window.location.href = "switch.html";
-      });
-    }
-  </script>
+    </script>
+  </body>
 </html>

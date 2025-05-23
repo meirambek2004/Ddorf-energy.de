@@ -114,6 +114,7 @@ button {
   background-color: #007aff;
   color: #fff;
   border-radius: 10px;
+  cursor: pointer;
 }
 .bottom-nav {
   display: flex;
@@ -159,6 +160,112 @@ button {
 }
 .short-text {
   display: none;
+}
+.days {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #daf8d3;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.trial {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trial .red-dot::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #ff4d4d;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.trial p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.trial .date {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.buy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buy .left {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-size: 14px;
+  color: #ff4d4d;
+  margin: 0;
+}
+
+.buy button.extend {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.buy button.extend img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#subscription-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+
+#subscription-button {
+  transition: filter 0.2s;
+  cursor: pointer;
 }
 @media (max-width: 600px) {
   body {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Change Email</title>
     <link rel="stylesheet" href="/style/changeEmail.css" />
   </head>
   <body>
@@ -36,50 +36,74 @@
           <p>Change email</p>
         </div>
         <div class="current">
-          <div class="curr email">
+          <div class="curr email input-group">
             <p>Current email</p>
-            <input type="text" placeholder="" />
-            <img
-              src="/newAcc-img/input.svg"
-              alt=""
-              width="16px"
-              class="doght"
-            />
+            <div class="input-wrapper">
+              <input type="text" placeholder="" />
+              <img
+                src="/newAcc-img/input.svg"
+                alt=""
+                width="16px"
+                class="doght"
+              />
+            </div>
           </div>
-          <div class="curr new">
+          <div class="curr new input-group">
             <p>New email</p>
-            <input type="text" placeholder="" />
-            <img
-              src="/newAcc-img/input.svg"
-              alt=""
-              width="16px"
-              class="doght"
-            />
+            <div class="input-wrapper">
+              <input type="text" placeholder="" />
+              <img
+                src="/newAcc-img/input.svg"
+                alt=""
+                width="16px"
+                class="doght"
+              />
+            </div>
           </div>
-          <div class="curr password">
+          <div class="curr password input-group">
             <p>Current password</p>
-            <input type="text" />
-            <img
-              src="/newAcc-img/input.svg"
-              alt=""
-              width="16px"
-              class="doght"
-            />
+            <div class="input-wrapper">
+              <input type="text" />
+              <img
+                src="/newAcc-img/input.svg"
+                alt=""
+                width="16px"
+                class="doght"
+              />
+            </div>
           </div>
-          <div class="curr confrim">
+          <div class="curr confirm input-group">
             <p>Confirm new email</p>
-            <input type="text" />
-            <img
-              src="/newAcc-img/input.svg"
-              alt=""
-              width="16px"
-              class="doght"
-            />
+            <div class="input-wrapper">
+              <input type="text" />
+              <img
+                src="/newAcc-img/input.svg"
+                alt=""
+                width="16px"
+                class="doght"
+              />
+            </div>
           </div>
           <div class="verif">
-            <button>
-              <img src="/newAcc-img/ico.svg" alt="" />Send verification code
-            </button>
+            <div
+              class="verify-code-wrapper"
+              style="display: flex; align-items: center"
+            >
+              <div
+                class="input-wrapper"
+                id="verify-input"
+                style="display: none; margin-right: 10px"
+              >
+                <input
+                  type="text"
+                  placeholder="enter verify code"
+                  class="verification-input"
+                />
+              </div>
+              <button id="send-verify-btn">
+                <img src="/newAcc-img/ico.svg" alt="" />Send verification code
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -97,30 +121,51 @@
         >
       </div>
     </footer>
-  </body>
-  <script>
-    const pageFromPath = location.pathname;
+    <script>
+      const pageFromPath = location.pathname;
 
-    document.querySelectorAll(".bottom-bar a").forEach((link) => {
-      const page = link.dataset.page;
+      document.querySelectorAll(".bottom-bar a").forEach((link) => {
+        const page = link.dataset.page;
 
-      if (
-        (page === "dashboard" && pageFromPath.includes("dashboard")) ||
-        (page === "devices" && pageFromPath.includes("devices")) ||
-        (page === "subsTrial" &&
-          (pageFromPath.includes("changPassw") ||
-            pageFromPath.includes("subsPremium") ||
-            pageFromPath.includes("/subsTrial.html") ||
-            pageFromPath.includes("persInfo") ||
-            pageFromPath.includes("changEmail")))
-      ) {
-        link.classList.add("active");
-      }
-    });
-    document
-      .getElementById("change-button")
-      .addEventListener("click", function () {
-        window.location.href = "account.html";
+        if (
+          (page === "dashboard" && pageFromPath.includes("dashboard")) ||
+          (page === "devices" && pageFromPath.includes("devices")) ||
+          (page === "subsTrial" &&
+            (pageFromPath.includes("changPassw") ||
+              pageFromPath.includes("subsPremium") ||
+              pageFromPath.includes("/subsTrial.html") ||
+              pageFromPath.includes("persInfo") ||
+              pageFromPath.includes("changEmail")))
+        ) {
+          link.classList.add("active");
+        }
       });
-  </script>
+
+      document
+        .getElementById("change-button")
+        .addEventListener("click", function () {
+          window.location.href = "account.html";
+        });
+
+      let confirmMode = false;
+
+      document
+        .getElementById("send-verify-btn")
+        .addEventListener("click", function () {
+          const verifyInputWrapper = document.getElementById("verify-input");
+          const input = verifyInputWrapper.querySelector("input");
+
+          if (!confirmMode) {
+            verifyInputWrapper.style.display = "flex";
+            this.innerHTML = "Confirm code"; // Можно и с иконкой: `<img src='/...'/> Confirm code`
+            this.classList.add("confirm-mode"); // Добавляем стиль
+            confirmMode = true;
+          } else {
+            const code = input.value;
+            console.log("Code confirmed:", code);
+            // Здесь обработка подтверждения кода
+          }
+        });
+    </script>
+  </body>
 </html>

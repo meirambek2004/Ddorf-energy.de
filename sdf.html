@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battery Schedule</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      .card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 400px;
+        margin-top: 20px;
+      }
+      .top-row,
+      .days,
+      .mode-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .toggle-btn {
+        border: none;
+        border-radius: 999px;
+        padding: 6px 14px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .toggle-on {
+        background: #e0f7e9;
+        color: #00a651;
+      }
+      .toggle-off {
+        background: #f0f0f0;
+        color: #888;
+      }
+      .days button {
+        background: #f0f0f0;
+        border: none;
+        border-radius: 8px;
+        padding: 6px;
+        margin-right: 4px;
+        cursor: pointer;
+        width: 34px;
+      }
+      .days button.active {
+        background: #d5f4e5;
+        color: #007a3d;
+      }
+      .section {
+        background: #f6f9fc;
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 12px;
+      }
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .slider-row {
+        margin-bottom: 10px;
+      }
+      .range-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      input[type="range"] {
+        flex: 1;
+      }
+      .value-label {
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="top-row">
+        <span>Schedule</span>
+        <button class="toggle-btn toggle-on">On</button>
+      </div>
+      <div class="mode-toggle">
+        <button class="toggle-btn toggle-off">one time</button>
+        <button class="toggle-btn toggle-on">repeat &#8635;</button>
+      </div>
+      <div class="days">
+        <button class="active">Mo</button>
+        <button class="active">Di</button>
+        <button class="active">Mi</button>
+        <button class="active">Do</button>
+        <button class="active">Fr</button>
+        <button>Sa</button>
+        <button>So</button>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <span>SoC Battery charge level</span>
+          <button class="toggle-btn toggle-off">off</button>
+        </div>
+        <div class="section-header">
+          <span>Threshold</span>
+          <button class="toggle-btn toggle-on">on</button>
+        </div>
+        <div class="slider-row">
+          <div class="range-container">
+            <input type="range" min="0" max="100" value="50" id="range1" />
+            <span class="value-label" id="label1">50-80 %</span>
+          </div>
+        </div>
+        <div class="slider-row">
+          <div class="range-container">
+            <input type="range" min="0" max="100" value="50" id="range2" />
+            <span class="value-label" id="label2">50-80 %</span>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <span>Price signal</span>
+          <button class="toggle-btn toggle-off">off</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function updateLabels() {
+        const r1 = document.getElementById("range1");
+        const r2 = document.getElementById("range2");
+        document.getElementById("label1").textContent = `${r1.value}-80 %`;
+        document.getElementById("label2").textContent = `${r2.value}-80 %`;
+      }
+
+      document.getElementById("range1").addEventListener("input", updateLabels);
+      document.getElementById("range2").addEventListener("input", updateLabels);
+    </script>
+  </body>
+</html>

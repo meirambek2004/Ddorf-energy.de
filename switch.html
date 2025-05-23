@@ -41,19 +41,22 @@
       <div class="settings-row">
         <div class="setting-item">
           <label>Rated power</label>
-          <div class="input-group">
+          <div class="input-group-setting">
+            <img src="/newAcc-img/input.svg" alt="" />
             <input type="text" value="300 W" />
           </div>
         </div>
         <div class="setting-item">
           <label>Minimum On-Time</label>
-          <div class="input-group">
+          <div class="input-group-setting">
+            <img src="/newAcc-img/input.svg" alt="" />
             <input type="text" value="2" />
           </div>
         </div>
         <div class="setting-item">
           <label>Minimum Off-Time</label>
-          <div class="input-group">
+          <div class="input-group-setting">
+            <img src="/newAcc-img/input.svg" alt="" />
             <input type="text" value="1" />
           </div>
         </div>
@@ -81,6 +84,127 @@
           </button>
         </div>
       </div>
+      <div id="scheduleContent" class="collapsed">
+        <div class="card" id="scheduleCard">
+          <div id="shed-head">
+            <div class="top-row">
+              <span>Schedule</span>
+              <button class="toggle-btn toggle-on">On</button>
+            </div>
+
+            <div class="mode-toggle">
+              <button class="toggle-btn toggle-off" id="one-time-btn">
+                <img src="/ico-img/watch.svg" alt="One-time icon" />
+                <span>one time</span>
+              </button>
+              <button class="toggle-btn toggle-on" id="repeat-btn">
+                <img src="/ico-img/repeat.svg" alt="Repeat icon" />
+                <span>repeat</span>
+              </button>
+              <img
+                src="/ico-img/delete.svg"
+                alt="Delete icon"
+                id="delete-icon"
+              />
+            </div>
+          </div>
+
+          <div class="days" id="days-section">
+            <button class="active">Mo</button>
+            <button class="active">Di</button>
+            <button class="active">Mi</button>
+            <button class="active">Do</button>
+            <button class="active">Fr</button>
+            <button>Sa</button>
+            <button>So</button>
+          </div>
+          <div class="time-range-container hidden" id="time-range-section">
+            <div class="time-track"></div>
+            <div class="time-fill" id="time-fill-bar"></div>
+            <input
+              type="range"
+              id="time-range-input"
+              min="0"
+              max="1439"
+              value="950"
+              step="1"
+            />
+            <div class="time-markers">
+              <span>00:00</span>
+              <span>23:59</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="input-group-section">
+              <label>SoC Battery charge level</label>
+              <div class="toggle" id="soc-toggle">
+                <span class="toggle-state">off</span>
+                <div class="slider">
+                  <div class="thumb"></div>
+                </div>
+                <span class="toggle-opposite"></span>
+              </div>
+            </div>
+            <div class="input-group-section">
+              <label>Threshold</label>
+              <div class="toggle" id="soc-toggle-thr">
+                <span class="toggle-state">off</span>
+                <div class="slider">
+                  <div class="thumb"></div>
+                </div>
+                <span class="toggle-opposite"></span>
+              </div>
+            </div>
+            <div class="slider-row hidden" id="range-group-1">
+              <div class="range-container">
+                <input type="range" min="0" max="100" value="50" id="range1" />
+                <span class="value-label" id="label1">50-80 %</span>
+              </div>
+            </div>
+            <div class="slider-row hidden" id="range-group-2">
+              <div class="range-container">
+                <input type="range" min="0" max="100" value="50" id="range2" />
+                <span class="value-label" id="label2">50-80 %</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="input-group-section">
+              <label>Price Signal</label>
+              <div class="toggle" id="threshold-toggle-2">
+                <span class="toggle-state">off</span>
+                <div class="slider">
+                  <div class="thumb"></div>
+                </div>
+                <span class="toggle-opposite"></span>
+              </div>
+            </div>
+            <div class="input-group hidden" id="threshold-range-group">
+              <div class="range-wrapper">
+                <div class="range-track"></div>
+                <div class="range-fill" id="range-fill"></div>
+                <input
+                  type="range"
+                  id="range-min"
+                  min="0"
+                  max="100"
+                  value="30"
+                />
+                <input
+                  type="range"
+                  id="range-max"
+                  min="0"
+                  max="100"
+                  value="80"
+                />
+              </div>
+              <span id="range-display">30–80 %</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="bottom-nav">
@@ -89,12 +213,112 @@
           ><img src="/home-img/dashboard.svg" alt="" /><span>Dashboard</span></a
         >
         <a href="devices.html" data-page="devices"
-          ><img src="/home-img/decice-ico.svg"" alt="" /><span>Devices</span></a
+          ><img src="/home-img/decice-ico.svg" alt="" /><span>Devices</span></a
         >
         <a href="account.html" data-page="subsTrial"
           ><img src="/home-img/settings.svg" alt="" /><span>Settings</span></a
         >
       </div>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const addOnButton = document.querySelector(".add-button.on");
+        const addOffButton = document.querySelector(".add-button.off");
+        const scheduleActions = document.querySelector(".schedule-actions");
+        const scheduleSection = document.querySelector(".schedule-section");
+        const scheduleContent = document.querySelector("#scheduleContent");
+        const daysSection = document.querySelector("#days-section");
+        const timeRangeSection = document.querySelector("#time-range-section");
+        const repeatButton = document.querySelector("#repeat-btn");
+        const oneTimeButton = document.querySelector("#one-time-btn");
+
+        const toggleSchedule = (showDays) => {
+          scheduleActions.classList.toggle("top-right");
+          scheduleSection.classList.toggle("expanded");
+          scheduleContent.classList.toggle("collapsed");
+          daysSection.classList.toggle("hidden", !showDays);
+          timeRangeSection.classList.remove("hidden"); // Always show time-range-section
+        };
+
+        addOnButton.addEventListener("click", () => toggleSchedule(false));
+        addOffButton.addEventListener("click", () => toggleSchedule(true));
+
+        // Handle repeat button click
+        if (repeatButton) {
+          repeatButton.addEventListener("click", () => {
+            daysSection.classList.remove("hidden"); // Show days-section
+            repeatButton.classList.remove("toggle-off");
+            repeatButton.classList.add("toggle-on");
+            oneTimeButton.classList.remove("toggle-on");
+            oneTimeButton.classList.add("toggle-off");
+          });
+        }
+
+        // Handle one-time button click
+        if (oneTimeButton) {
+          oneTimeButton.addEventListener("click", () => {
+            daysSection.classList.add("hidden"); // Hide days-section
+            oneTimeButton.classList.remove("toggle-off");
+            oneTimeButton.classList.add("toggle-on");
+            repeatButton.classList.remove("toggle-on");
+            repeatButton.classList.add("toggle-off");
+          });
+        }
+
+        const priceToggle = document.getElementById("price-toggle");
+        if (priceToggle) {
+          priceToggle.addEventListener("click", () => {
+            const toggleState = priceToggle.querySelector(".toggle-state");
+            const isActive = priceToggle.classList.toggle("active");
+            toggleState.textContent = isActive ? "on" : "off";
+          });
+        }
+
+        const secondTherd = document.getElementById("threshold-toggle-2");
+        const rangeGroup = document.getElementById("threshold-range-group");
+
+        if (secondTherd && rangeGroup) {
+          secondTherd.addEventListener("click", () => {
+            const toggleState = secondTherd.querySelector(".toggle-state");
+            const isActive = secondTherd.classList.toggle("active");
+            toggleState.textContent = isActive ? "on" : "off";
+            rangeGroup.classList.toggle("hidden", !isActive);
+          });
+        }
+
+        const toggleThreshold = document.getElementById("soc-toggle-thr");
+        const toggleStateThreshold =
+          toggleThreshold?.querySelector(".toggle-state");
+        const rangeGroup1 = document.getElementById("range-group-1");
+        const rangeGroup2 = document.getElementById("range-group-2");
+
+        if (
+          toggleThreshold &&
+          toggleStateThreshold &&
+          rangeGroup1 &&
+          rangeGroup2
+        ) {
+          toggleThreshold.addEventListener("click", () => {
+            const isActive = toggleThreshold.classList.toggle("active");
+            toggleStateThreshold.textContent = isActive ? "on" : "off";
+            rangeGroup1.classList.toggle("hidden", !isActive);
+            rangeGroup2.classList.toggle("hidden", !isActive);
+          });
+        }
+
+        const toggle = document.getElementById("soc-toggle");
+        const toggleState = toggle?.querySelector(".toggle-state");
+
+        if (toggle && toggleState) {
+          let isOn = false;
+          toggle.addEventListener("click", () => {
+            isOn = !isOn;
+            toggleState.textContent = isOn ? "on" : "off";
+            toggle.classList.toggle("active", isOn);
+          });
+        }
+      });
+    </script>
   </body>
 </html>

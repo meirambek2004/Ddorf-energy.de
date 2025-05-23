@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style/wallbox.css" />
+    <style></style>
   </head>
   <body>
     <header class="top-bar">
@@ -38,8 +39,8 @@
       <h1 class="title">Wallbox settings</h1>
       <div class="settings-container">
         <div class="column left-column">
-          <div class="card">
-            <h2 class="card-title" id="charging">Charging Power Limit</h2>
+          <div class="" id="charging-card">
+            <h2 class="card-title">Charging Power Limit</h2>
             <div class="input-group" id>
               <input type="text" value="11 kW" id="chargin-input" />
             </div>
@@ -53,20 +54,48 @@
             </div>
             <div class="input-group">
               <label>SoC Battery charge level</label>
-              <div class="toggle">
-                <span>off</span>
+              <div class="toggle" id="soc-toggle">
+                <span class="toggle-state">off</span>
                 <div class="slider">
                   <div class="thumb"></div>
                 </div>
-                <span>on</span>
+                <span class="toggle-opposite"></span>
               </div>
             </div>
-            <div class="range">
-              <span>0%</span>
-              <input type="range" min="0" max="100" value="50" />
-              <span>100%</span>
-              <span class="range-value">50-80%</span>
+            <div class="input-group">
+              <label>Threshold</label>
+              <div class="toggle" id="soc-toggle-thr">
+                <span class="toggle-state">off</span>
+                <div class="slider">
+                  <div class="thumb"></div>
+                </div>
+                <span class="toggle-opposite"></span>
+              </div>
             </div>
+            <div class="input-group hidden" id="threshold-range-group">
+              <!-- <label for="range-min">Threshold range</label> -->
+              <div class="range-wrapper">
+                <div class="range-track"></div>
+                <div class="range-fill" id="range-fill"></div>
+                <input
+                  type="range"
+                  id="range-min"
+                  min="0"
+                  max="100"
+                  value="30"
+                />
+                <input
+                  type="range"
+                  id="range-max"
+                  min="0"
+                  max="100"
+                  value="80"
+                />
+              </div>
+              <span id="range-display">30–80 %</span>
+            </div>
+
+            <div class="range"></div>
           </div>
         </div>
 
@@ -75,19 +104,28 @@
             <h2 class="card-title">Smart</h2>
             <div class="input-group">
               <label>Target charge time</label>
-              <input type="text" value="2025.09.01" readonly />
+              <div class="calendar" id="calendar-trigger">
+                <img src="/ico-img/calendar.svg" alt="" />
+                <p>2025.09.01</p>
+              </div>
+              <div id="calendar-modal" class="modal hidden">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <iframe src="calendar.html" frameborder="0"></iframe>
+                </div>
+              </div>
             </div>
             <div class="input-group">
               <label>Current charge level of the car</label>
-              <input type="text" value="15%" readonly />
+              <input type="text" value="15%" />
             </div>
             <div class="input-group">
               <label>Target charge level</label>
-              <input type="text" value="80%" readonly />
+              <input type="text" value="80%" />
             </div>
             <div class="input-group">
               <label>EV's total battery</label>
-              <input type="text" value="60 kWh" readonly />
+              <input type="text" value="60 kWh" />
             </div>
             <div class="input-group">
               <label>Calculated cost</label>
@@ -99,11 +137,11 @@
             <h2 class="card-title">Advanced</h2>
             <div class="input-group">
               <label>Wallbox Minimum ON-Time</label>
-              <input type="text" value="15 s" readonly />
+              <input type="text" value="15 s" />
             </div>
             <div class="input-group">
               <label>Wallbox Minimum OFF-Time</label>
-              <input type="text" value="30 s" readonly />
+              <input type="text" value="30 s" />
             </div>
           </div>
         </div>
@@ -124,5 +162,69 @@
       </div>
     </footer>
   </body>
-  <script></script>
+  <script>
+    // Переключатель SoC
+    const toggle = document.getElementById("soc-toggle");
+    const toggleState = toggle.querySelector(".toggle-state");
+
+    let isOn = false;
+
+    toggle.addEventListener("click", () => {
+      isOn = !isOn;
+      toggleState.textContent = isOn ? "on" : "off";
+      toggle.classList.toggle("active", isOn);
+    });
+
+    // Переключатель Threshold
+    const toggleThreshold = document.getElementById("soc-toggle-thr");
+    const toggleStateThreshold = toggleThreshold.querySelector(".toggle-state");
+    const thresholdRangeGroup = document.getElementById(
+      "threshold-range-group"
+    );
+
+    toggleThreshold.addEventListener("click", () => {
+      const isActive = toggleThreshold.classList.toggle("active");
+      toggleStateThreshold.textContent = isActive ? "on" : "off";
+      thresholdRangeGroup.classList.toggle("hidden", !isActive);
+    });
+
+    // Двойной ползунок (в процентах)
+    const rangeMin = document.getElementById("range-min");
+    const rangeMax = document.getElementById("range-max");
+    const rangeDisplay = document.getElementById("range-display");
+    const rangeFill = document.getElementById("range-fill");
+
+    function updateRangeDisplay() {
+      let min = parseInt(rangeMin.value);
+      let max = parseInt(rangeMax.value);
+
+      if (min > max) [min, max] = [max, min];
+
+      rangeDisplay.textContent = `${min}–${max} %`;
+      rangeFill.style.left = `${min}%`;
+      rangeFill.style.width = `${max - min}%`;
+    }
+
+    rangeMin.addEventListener("input", updateRangeDisplay);
+    rangeMax.addEventListener("input", updateRangeDisplay);
+    updateRangeDisplay();
+
+    const calendarTrigger = document.getElementById("calendar-trigger");
+    const modal = document.getElementById("calendar-modal");
+    const closeBtn = modal.querySelector(".close");
+
+    calendarTrigger.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  </script>
 </html>

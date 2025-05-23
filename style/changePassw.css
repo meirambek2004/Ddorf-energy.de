@@ -146,6 +146,72 @@ button {
   filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
     hue-rotate(194deg) brightness(98%) contrast(106%);
 }
+.current input:focus {
+  border: 2px solid #007aff !important;
+  outline: none;
+}
+
+.current input:focus ~ .dote {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%) !important;
+}
+#send-verify-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+#verify-container input {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#verify-container input.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#verify-container p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#verify-container p.show {
+  opacity: 1;
+}
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#change-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+
+#change-button {
+  transition: filter 0.2s;
+  cursor: pointer;
+}
 @media (max-width: 600px) {
   body {
     padding: 0;

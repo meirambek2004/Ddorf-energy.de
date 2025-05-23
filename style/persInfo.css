@@ -124,6 +124,7 @@ button {
   background-color: #007aff;
   color: #fff;
   border-radius: 10px;
+  cursor: pointer;
 }
 .bottom-nav {
   display: flex;
@@ -175,6 +176,115 @@ button {
 .bottom-nav a.active img {
   filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
     hue-rotate(194deg) brightness(98%) contrast(106%);
+}
+.info input:focus {
+  border: 2px solid #007aff !important;
+  outline: none;
+}
+
+/* Подсветка картинки рядом с input при фокусе */
+.info input:focus + img.doght,
+.info input:focus + img.county-doght {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%);
+  transition: filter 0.3s ease;
+}
+
+/* Плавный переход для бордера */
+.info input {
+  transition: border 0.3s ease;
+}
+
+/* Стили для кастомного выпадающего списка */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.select-selected {
+  height: 50px; /* Соответствует высоте input */
+  background-color: #fff;
+  border: 2px solid #c7cbd8; /* Соответствует бордеру input */
+  border-radius: 10px; /* Соответствует border-radius input */
+  padding: 0 15px; /* Соответствует padding из select */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+  font-size: 1rem;
+  font-family: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+
+.select-selected:focus {
+  border: 2px solid #007aff !important;
+  outline: none;
+}
+
+.select-selected:focus + img.county-doght {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
+    hue-rotate(194deg) brightness(98%) contrast(106%);
+  transition: filter 0.3s ease;
+}
+
+.select-items {
+  position: absolute;
+  background-color: #eceef6;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+}
+
+.select-items div {
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.select-items div:hover {
+  background-color: transparent;
+}
+
+.select-items.show {
+  display: block;
+}
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#change-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+#change-button {
+  transition: filter 0.2s;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {

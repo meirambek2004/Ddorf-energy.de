@@ -79,6 +79,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 200px;
+  cursor: pointer;
 }
 .bottom-nav {
   display: flex;
@@ -145,6 +146,44 @@ p {
 .bottom-nav a.active img {
   filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
     hue-rotate(194deg) brightness(98%) contrast(106%);
+}
+.redect {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: gray;
+  cursor: pointer;
+  text-decoration: none;
+}
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#change-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+#change-button {
+  transition: filter 0.2s;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {

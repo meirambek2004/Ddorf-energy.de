@@ -141,3 +141,88 @@ button {
   filter: brightness(0) saturate(100%) invert(35%) sepia(99%) saturate(1612%)
     hue-rotate(194deg) brightness(98%) contrast(106%);
 }
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  transition: border 0.3s;
+  background-color: white;
+}
+
+.input-wrapper input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+}
+
+.input-wrapper img {
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.input-group:focus-within .input-wrapper {
+  border-color: #007bff; /* Синий цвет */
+}
+
+.input-group:focus-within img {
+  filter: brightness(0) saturate(100%) invert(30%) sepia(100%) saturate(500%)
+    hue-rotate(190deg);
+}
+.verification-input {
+  font-size: 8px;
+  text-align: center;
+  width: 120px;
+  height: 40px;
+}
+#send-verify-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* стиль при "Confirm code" */
+#send-verify-btn.confirm-mode {
+  width: 120px;
+  color: white;
+}
+.menu-nav a,
+.bottom-bar a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.menu-nav img,
+.bottom-bar img {
+  transition: filter 0.2s;
+}
+
+.menu-nav:hover img,
+.bottom-bar a:hover img,
+#change-button:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2349%)
+    hue-rotate(203deg) brightness(94%) contrast(96%);
+}
+
+.menu-nav:hover a,
+.bottom-bar a:hover span {
+  color: #000;
+}
+
+#change-button {
+  transition: filter 0.2s;
+  cursor: pointer;
+}
